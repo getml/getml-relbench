@@ -113,7 +113,10 @@ container.add(customer, transaction, article)
 pipe = getml.Pipeline(
     tags=["task: user-churn"],
     data_model=dm,
-    feature_learners=[getml.feature_learning.FastProp()],
+    feature_learners=[
+        getml.feature_learning.FastProp(),
+        getml.feature_learning.Multirel()
+    ],
     predictors=[getml.predictors.XGBoostClassifier()],
     loss_function=getml.feature_learning.loss_functions.CrossEntropyLoss,
 )
