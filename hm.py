@@ -7,7 +7,9 @@ from relbench.tasks import get_task
 dataset = get_dataset("rel-hm", download=True)
 task = get_task("rel-hm", "user-churn", download=True)
 
-getml.set_project("rel-hm")
+getml.set_project("rel-hm", in_memory=False)
+
+population_roles = getml.data.Roles(
 
 population_roles = getml.data.Roles(
     join_key=["customer_id"],

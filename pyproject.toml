@@ -15,9 +15,9 @@ dependencies = [
   "tdqm",
   "pandas-stubs",
   "polars",
+  "ipywidgets"
 ]
 post-install-commands = [
-  "uv pip install -e {root:parent:uri}/monorepo/src/python-api"
 ]
 
 [tool.ruff]
