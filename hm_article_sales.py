@@ -5,13 +5,13 @@ from relbench.datasets import get_dataset
 from relbench.tasks import get_task
 # %%
 dataset = get_dataset("rel-hm", download=True)
-task = get_task("rel-hm", "user-churn", download=True)
+task = get_task("rel-hm", "item-sales", download=True)
 
 getml.set_project("rel-hm")
 # %%
 population_roles = getml.data.Roles(
-    join_key=["customer_id"],
-    target=["churn"],
+    join_key=["article_id"],
+    target=["sales"],
     time_stamp=["timestamp"],
 )
 
@@ -104,25 +104,25 @@ dm.add(
     customer.to_placeholder(), transaction.to_placeholder(), article.to_placeholder()
 )
 dm.population.join(
-    dm.customer, on="customer_id", relationship=getml.data.relationship.many_to_one
+    dm.article, on="article_id", relationship=getml.data.relationship.many_to_one
 )
 dm.population.join(
-    dm.transaction, on="customer_id", time_stamps=("reference_date", "t_dat")
+    dm.transaction, on="article_id", time_stamps=("reference_date", "t_dat")
 )
 dm.transaction.join(
-    dm.article, on="article_id", relationship=getml.data.relationship.many_to_one
+    dm.customer, on="customer_id", relationship=getml.data.relationship.many_to_one
 )
 
 container = getml.data.Container(**populations)
 container.add(customer, transaction, article)
 
 pipe = getml.Pipeline(
-    tags=["task: user-churn"],
+    tags=["task: item-sales"],
     data_model=dm,
     preprocessors=[getml.preprocessors.Mapping()],
     feature_learners=[getml.feature_learning.FastProp()],
-    predictors=[getml.predictors.XGBoostClassifier()],
-    loss_function=getml.feature_learning.loss_functions.CrossEntropyLoss,
+    predictors=[getml.predictors.XGBoostRegressor()],
+    loss_function=getml.feature_learning.loss_functions.SquareLoss,
 )
 # %%
 pipe.fit(container.train)
