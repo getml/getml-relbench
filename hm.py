@@ -115,7 +115,27 @@ pipe = getml.Pipeline(
         getml.feature_learning.FastProp(
             num_threads=8,
             n_most_frequent=3,
-            aggregation=getml.feature_learning.FastProp.agg_sets.all,
+            aggregation=getml.feature_learning.FastProp.agg_sets.default
+            | {
+                getml.feature_learning.aggregations.COUNT_DISTINCT_OVER_COUNT,
+                getml.feature_learning.aggregations.EWMA_1D,
+                getml.feature_learning.aggregations.EWMA_7D,
+                getml.feature_learning.aggregations.EWMA_30D,
+                getml.feature_learning.aggregations.EWMA_90D,
+                getml.feature_learning.aggregations.EWMA_365D,
+                getml.feature_learning.aggregations.EWMA_TREND_7D,
+                getml.feature_learning.aggregations.EWMA_TREND_30D,
+                getml.feature_learning.aggregations.EWMA_TREND_90D,
+                getml.feature_learning.aggregations.EWMA_TREND_365D,
+                getml.feature_learning.aggregations.Q_1,
+                getml.feature_learning.aggregations.Q_5,
+                getml.feature_learning.aggregations.Q_10,
+                getml.feature_learning.aggregations.Q_25,
+                getml.feature_learning.aggregations.TIME_SINCE_FIRST_MINIMUM,
+                getml.feature_learning.aggregations.TIME_SINCE_LAST_MINIMUM,
+                getml.feature_learning.aggregations.TIME_SINCE_LAST_MAXIMUM,
+                getml.feature_learning.aggregations.TIME_SINCE_FIRST_MAXIMUM,
+            },
         )
     ],
     predictors=[getml.predictors.XGBoostClassifier(n_jobs=8)],
