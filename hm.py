@@ -7,7 +7,27 @@ from relbench.tasks import get_task
 dataset = get_dataset("rel-hm", download=True)
 task = get_task("rel-hm", "user-churn", download=True)
 
+getml.engine.launch(in_memory=False)
+
 getml.set_project("rel-hm")
+
+
+def load_df(path: str, name: str, roles: getml.data.Roles) -> getml.data.DataFrame:
+    """
+    Load a DataFrame from a parquet file and save it in getml native format to
+    disk if it does not exist yet.
+    """
+    if getml.data.exists(name):
+        return getml.data.load_data_frame(name)
+
+    df = getml.data.DataFrame.from_parquet(
+        path,
+        name=name,
+        roles=roles,
+    )
+    df.save()
+    return df
+
 
 population_roles = getml.data.Roles(
     join_key=["customer_id"],
@@ -18,10 +38,10 @@ population_roles = getml.data.Roles(
 subsets = ("train", "test", "val")
 populations = {}
 for subset in subsets:
-    populations[subset] = getml.data.DataFrame.from_parquet(
-        f"{task.cache_dir}/{subset}.parquet",
-        name=f"population_{subset}",
-        roles=population_roles,
+    populations[subset] = load_df(
+        f"{dataset.cache_dir}/tasks/user-churn/{subset}.parquet",
+        subset,
+        population_roles,
     )
     populations[subset]["reference_date"] = dataset.test_timestamp.to_datetime64()
     populations[subset].set_role(["reference_date"], getml.data.roles.time_stamp)
@@ -32,15 +52,13 @@ customer_roles = getml.data.Roles(
     categorical=[
         "club_member_status",
         "fashion_news_frequency",
+        "postal_code",
     ],
 )
 
-customer = getml.DataFrame.from_parquet(
-    f"{dataset.cache_dir}/db/customer.parquet",
-    name="customer",
-    roles=customer_roles,
+customer = load_df(
+    f"{dataset.cache_dir}/db/customer.parquet", "customer", customer_roles
 )
-
 customer.set_unit(["FN", "Active", "postal_code"], "comparison only")
 
 transaction_roles = getml.data.Roles(
@@ -50,53 +68,32 @@ transaction_roles = getml.data.Roles(
     categorical=["sales_channel_id"],
 )
 
-transaction = getml.DataFrame.from_parquet(
-    f"{dataset.cache_dir}/db/transactions.parquet",
-    name="transaction",
-    roles=transaction_roles,
+transaction = load_df(
+    f"{dataset.cache_dir}/db/transactions.parquet", "transaction", transaction_roles
 )
 
 article_roles = getml.data.Roles(
     join_key=["article_id"],
-    numerical=[
-        "product_code",
-        "product_type_no",
-        "perceived_colour_master_id",
-        "department_no",
-        "section_no",
-    ],
     categorical=[
-        "product_type_name",
+        # "product_type_name",
         "product_group_name",
-        "graphical_appearance_no",
-        "graphical_appearance_name",
-        "colour_group_code",
-        "colour_group_name",
-        "perceived_colour_value_id",
-        "perceived_colour_value_name",
-        "perceived_colour_master_name",
+        # "graphical_appearance_name",
+        # "colour_group_name",
+        # "perceived_colour_value_name",
+        # "perceived_colour_master_name",
+        # "section_no",
         "department_name",
-        "index_code",
-        "index_name",
-        "index_group_no",
-        "index_group_name",
-        "garment_group_no",
+        # "index_name",
+        # "index_group_name",
         "garment_group_name",
     ],
     # text=["prod_name", "section_name", "detail_desc"], # broken
 )
 
-article = getml.DataFrame.from_parquet(
-    f"{dataset.cache_dir}/db/article.parquet",
-    name="article",
-    roles=article_roles,
-)
-
+article = load_df(f"{dataset.cache_dir}/db/article.parquet", "article", article_roles)
 
 dm = getml.data.DataModel(population=populations["train"].to_placeholder())
-dm.add(
-    customer.to_placeholder(), transaction.to_placeholder(), article.to_placeholder()
-)
+dm.add(getml.data.to_placeholder(customer, transaction, article))
 dm.population.join(
     dm.customer, on="customer_id", relationship=getml.data.relationship.many_to_one
 )
@@ -113,13 +110,20 @@ container.add(customer, transaction, article)
 pipe = getml.Pipeline(
     tags=["task: user-churn"],
     data_model=dm,
+    preprocessors=[getml.preprocessors.Seasonal(), getml.preprocessors.Mapping()],
     feature_learners=[
-        getml.feature_learning.FastProp(),
-        getml.feature_learning.Multirel()
+        getml.feature_learning.FastProp(
+            num_threads=8,
+            n_most_frequent=3,
+            aggregation=getml.feature_learning.FastProp.agg_sets.all,
+        )
     ],
-    predictors=[getml.predictors.XGBoostClassifier()],
+    predictors=[getml.predictors.XGBoostClassifier(n_jobs=8)],
+    feature_selectors=[getml.predictors.XGBoostClassifier(n_jobs=8)],
     loss_function=getml.feature_learning.loss_functions.CrossEntropyLoss,
 )
+
+pipe.check(container.train)
 
 pipe.fit(container.train)
 
@@ -130,5 +134,5 @@ predictions = {}
 for subset in subsets:
     predictions[subset] = pipe.predict(container[subset])
 
-task.evaluate(predictions["test"], target_table=task.get_table("test"))
+task.evaluate(predictions["test"])
 task.evaluate(predictions["val"], target_table=task.get_table("val"))
