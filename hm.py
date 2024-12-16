@@ -43,8 +43,6 @@ for subset in subsets:
         subset,
         population_roles,
     )
-    populations[subset]["reference_date"] = dataset.test_timestamp.to_datetime64()
-    populations[subset].set_role(["reference_date"], getml.data.roles.time_stamp)
 
 customer_roles = getml.data.Roles(
     join_key=["customer_id"],
@@ -98,7 +96,9 @@ dm.population.join(
     dm.customer, on="customer_id", relationship=getml.data.relationship.many_to_one
 )
 dm.population.join(
-    dm.transaction, on="customer_id", time_stamps=("reference_date", "t_dat")
+    dm.transaction,
+    on="customer_id",
+    time_stamps=("timestamp", "t_dat"),
 )
 dm.transaction.join(
     dm.article, on="article_id", relationship=getml.data.relationship.many_to_one
