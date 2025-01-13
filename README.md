@@ -65,8 +65,8 @@ Ready to take on the challenge? Choose a task and start building your solution!
     * We highly encourage you to use a regression or classification model of your choice on top of the generated features.
 4. **Stay Active:**
    * Push updates to your PR on a rolling basis.
-   * Every meaningful commit resets the inactivity timer.
-   * If there's **no activity** for **5 days**, we might close the Draft PR to free up the task for others.
+   * Every meaningful commit, discussion or interaction resets the inactivity timer.
+   * If there's **no activity** or progress for **5 days**, we might close the Draft PR to free up the task for others.
 5. **Aim to Beat Existing Scores:**
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
    * If you surpass at least one, that's excellent\!
