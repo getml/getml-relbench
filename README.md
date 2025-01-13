@@ -65,16 +65,16 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * Push updates to your PR on a rolling basis.
    * If there's no activity for 5 days, we might close the Draft PR to free up the task for others.
    * Every meaningful commit, discussion or interaction resets the inactivty timer.
+   * We'll answer question, provide comments or suggestions to your Draft PR on a rolling basis within 5 days.
 5. **Aim to Beat Existing Scores:**
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
    * If you surpass at least one, that's excellent\!
    * If not, don't worry. We'll provide feedback and support.
-6. **Address Feedback:**
-   * We'll review your Draft PR and provide comments, suggestions, or questions.
-   * We aim to review on a rolling basis and address your Draft PR within 7 days.
-   * Once you've addressed the feedback, mark your PR as "Ready for Review".
-7. **Get Your PR Merged:**
+6. **Get Your PR Merged and address Feedback:**
+   * Once you feel that your notebook is ready for merge, mark your PR as **Ready for Review**.
+   * We´ll review your PR and add feedback and suggestions where we see fit.
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
+7. **After merging the PR**
    * You will receive a €100 voucher as a thank you for your contribution.
    * You will receive public credit for your submission, and your name will be tied to it.
    * You will receive a notable mention in any follow-up studies or publications related to this challenge.
@@ -108,8 +108,13 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
  * **Licensing**: The submitted notebook needs to contain the below license infromation in a dedicated cell:
 
 
-> Code License: All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
+```markdown
+**License:**
+
+All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
+
 Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+```
 
 
 
