@@ -70,7 +70,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
    * If you surpass at least one, that's excellent\!
    * If not, don't worry. We'll provide feedback and support.
-6. **Get Your PR Merged and address Feedback:**
+6. **Get Your PR Merged and Address Feedback:**
    * Once you feel that your notebook is ready for merge, mark your PR as **Ready for Review**.
    * We´ll review your PR and add feedback and suggestions where we see fit.
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
