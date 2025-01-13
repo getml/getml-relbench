@@ -19,9 +19,9 @@ Relational data, often found in databases with multiple linked tables, poses a s
 
 At the heart of [getML-community](https://github.com/getml/getml-community) lies [FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop), our open-source algorithm specifically designed for efficient feature engineering on relational data. FastProp, short for fast propositionalization, seamlessly transforms complex relational data into a single table format, making it compatible with any machine learning algorithm. This automation not only saves you valuable time and effort but also has the potential to reveal hidden patterns crucial for accurate predictions.
 
-> * **Unmatched Speed:**  It's engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
-> * **Simplicity:** FastProp seamlessly integrates with the MLOps ecosystem, making it incredibly easy to incorporate into your workflow.
-> * **Enhanced Productivity:** By streamlining the tedious process of feature engineering, getML FastProp allows you to focus on the business critical aspects of your project, and not thousands of lines of SQL.
+* **Unmatched Speed:**  It's engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
+* **Simplicity:** FastProp seamlessly integrates with the MLOps ecosystem, making it incredibly easy to incorporate into your workflow.
+* **Enhanced Productivity:** By streamlining the tedious process of feature engineering, getML FastProp allows you to focus on the business critical aspects of your project, and not thousands of lines of SQL.
 
 
 ### Introducing RelBench
@@ -29,14 +29,12 @@ At the heart of [getML-community](https://github.com/getml/getml-community) lies
 [RelBench](https://relbench.stanford.edu/), a project by SNAP from Stanford University, provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for comparison.
 
 * **How did human data scientists work?** In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
-* **What is RDL?** RDL (Relational Deep Learning) represents a category of approaches within relational learning that leverage deep learning techniques to automatically learn complex patterns from relational data.
+* **What is RDL?** Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
 
 
-## The getML-Relbench Challenge
+# Let's Bring it All Together - the getML-Relbench Challenge
 
-### Let's Bring it All Together
-
-### Take on the getML-RelBench Challenge!
+### Take on the getML-RelBench Challenge
 
 We've been busy putting [getML FastProp](https://github.com/getml/getml-community) to the test on RelBench, and the results are impressive!  We've already surpassed both RDL and human baselines on two tasks, and we believe there's plenty more potential to unlock. Now, it's your turn to explore the power of getML and see what you can achieve.
 
@@ -65,8 +63,8 @@ Ready to take on the challenge? Choose a task and start building your solution!
     * We highly encourage you to use a regression or classification model of your choice on top of the generated features.
 4. **Stay Active:**
    * Push updates to your PR on a rolling basis.
-   * Every meaningful commit, discussion or interaction resets the inactivity timer.
-   * If there's **no activity** or progress for **5 days**, we might close the Draft PR to free up the task for others.
+   * If there's **no activity** for **5 days**, we might close the Draft PR to free up the task for others.
+   * Every meaningful commit, discussion or interaction resets the inactivty timer.
 5. **Aim to Beat Existing Scores:**
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
    * If you surpass at least one, that's excellent\!
