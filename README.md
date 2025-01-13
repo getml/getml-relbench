@@ -4,10 +4,12 @@ Welcome to the [getML](https://getml.com/) Community x RelBench Challenge! This 
 
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
-* **Build better models faster:** Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data without the likes of manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
+* **Build better models faster:** Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data to deliver more accurate prediction models without the likes of manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
 * **Gain recognition and rewards:**  Showcase your skills, climb the leaderboards, and earn a €100 gift card for every accepted submission. Your contributions could be featured in community spotlights and future publications!
 * **Expand your network:**  Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
+
+> This challenge will be open for submissions starting from the 20th of January 2025!
 
 ## What is Relational Learning?
 
@@ -26,28 +28,26 @@ At the heart of [getML-community](https://github.com/getml/getml-community) lies
 
 ### Introducing RelBench
 
-[RelBench](https://relbench.stanford.edu/), a project by SNAP from Stanford University, provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for comparison.
+[RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for comparison. 
 
 * **How did human data scientists work?** In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
 * **What is RDL?** Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
 
 
-# Let's Bring it All Together - the getML-Relbench Challenge
+## Let's Bring it Together - The getML x Relbench Challenge
 
-### Take on the getML-RelBench Challenge
+### Take on the Challenge
 
-We've been busy putting [getML FastProp](https://github.com/getml/getml-community) to the test on RelBench, and the results are impressive!  We've already surpassed both RDL and human baselines on two tasks, and we believe there's plenty more potential to unlock. Now, it's your turn to explore the power of getML and see what you can achieve.
+We've been busy putting [getML FastProp](https://github.com/getml/getml-community) to the test on RelBench, and the results are [quite impressive](#get-started-with-getml-fastprop)!  We've already surpassed both RDL and human baselines on two tasks, and we believe there's plenty more potential to unlock. Now, it's your turn to explore the power of getML and see what you can achieve.
 
 This challenge invites you to apply your data science skills and creativity to a series of unsolved RelBench tasks. We encourage you to experiment with getML FastProp, combine it with your favorite machine learning models, and see if you can surpass the existing baselines – and maybe even our own scores!
 
+- **This is what we are looking for:**
+    * Effective use of getML: Demonstrate a good understanding of getML data models and how to tune them for optimal performance.
+    * Performance: Aim to outperform at least one of the existing [RelBench baselines](#pick-a-challenge).
+    * Sound and reproducible code:  Well-structured, modern and commented code that others can easily understand and execute.
+
 Ready to take on the challenge? Choose a task and start building your solution!
-
-**What are we looking for?**
-
-* **Effective use of getML**: Demonstrate a good understanding of getML data models and how to tune them for optimal performance.
-* **Performance**: Aim to outperform at least one of the existing [RelBench baselines](#pick-a-challenge).
-* **Sound and reproducible code:**  Well-structured, modern and commented code that others can easily understand and execute.
-
 
 ### This is How You Participate
 
@@ -58,12 +58,12 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).
    * This reserves the task for you. No one else can claim it while your Draft PR is open.
 3. **Build a Predictor that Uses FastProp:**
-    * Develop your solution, using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.
-    * Document your code, pipeline, and reasoning clearly in the notebook.
-    * We highly encourage you to use a regression or classification model of your choice on top of the generated features.
+   * Develop your solution, using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.
+   * Document your code, pipeline, and reasoning clearly in the notebook.
+   * We highly encourage you to use a regression or classification model of your choice on top of the generated features.
 4. **Stay Active:**
    * Push updates to your PR on a rolling basis.
-   * If there's **no activity** for **5 days**, we might close the Draft PR to free up the task for others.
+   * If there's no activity for 5 days, we might close the Draft PR to free up the task for others.
    * Every meaningful commit, discussion or interaction resets the inactivty timer.
 5. **Aim to Beat Existing Scores:**
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
@@ -72,7 +72,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
 6. **Address Feedback:**
    * We'll review your Draft PR and provide comments, suggestions, or questions.
    * We aim to review on a rolling basis and address your Draft PR within 7 days.
-   * Once you've addressed the feedback, mark your PR as **Ready for Review**.
+   * Once you've addressed the feedback, mark your PR as "Ready for Review".
 7. **Get Your PR Merged:**
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
    * You will receive a €100 voucher as a thank you for your contribution.
@@ -82,24 +82,11 @@ Ready to take on the challenge? Choose a task and start building your solution!
 
 ### Rewards & Recognition
 
-1.  **€100 Gift Card**: A €100 gift card for each successfully merged notebook that beats at least one baseline.
-2.  **Community Spotlight**: We'll announce your contribution on our communication channels, only if you agree.
+1.  €100 Gift Card: A €100 gift card for each successfully merged notebook that beats at least one baseline.
+2.  Community Spotlight: We'll announce your contribution on our communication channels, only if you agree.
 
 
-### Submission Criteria
-
- * **Participation:**  Submit a maximum of two PRs.
- * **FastProp is Key:**  Utilize [getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/#getml.feature_learning.FastProp) for automated feature engineering in your solutions.
- * **Performance Goal:**  Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
- * **Collaboration:**  Actively participate by addressing feedback provided on your PR.
- * **Reproducibility:**  Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
- * **Licensing:**
-     * Code must be licensed under the [MIT License](https://mit-license.org/).
-     * Text and images must be licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-     * At the bottom of your notebook should be a cell with the [license details](#notebook-license).
- * **Leaderboard:** Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
-
-### Get Started with getML FastProp
+## Get Started with getML FastProp
 
 We've prepared two example notebooks to help you get started:
 
@@ -111,9 +98,24 @@ These notebooks provide a practical introduction to the getML workflow, from dat
 Furhter information can be found in the **[User Guide](https://getml.com/latest/user_guide/)** and the **[API Reference](https://getml.com/latest/reference/)**.
 
 
+## Submission Criteria
+ * **Participation**: Submit a maximum of two PRs.
+ * **FastProp is Key**: Utilize [getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/#getml.feature_learning.FastProp) for automated feature engineering in your solutions.
+ * **Performance Goal**: Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
+ * **Collaboration**: Actively participate by addressing feedback provided on your PR.
+ * **Reproducibility**: Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
+ * **Leaderboard**: Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
+ * **Licensing**: The submitted notebook needs to contain the below license infromation in a dedicated cell:
+
+
+> Code License: All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
+Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+
+
 ## Pick a Challenge
 
-| **Dataset**                                                     | **Task**                                                                             | **Solution**    | **Task + Measure**     | **Score getML**             | **Score RDL** | **Score Human** |
+| **Dataset**                                                     | **Task**                                                                             | **PR's & Submissions**    | **Task + Measure**     | **Score getML**             | **Score RDL** | **Score Human** |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- | ---------------------- | --------------------------- | ------------- | --------------- |
 | [rel-amazon](https://relbench.stanford.edu/datasets/rel-amazon) | [user-churn](https://relbench.stanford.edu/datasets/rel-amazon/#user-churn)          |     | classification (AUROC) | –                           | **0.704**     | 0.676           |
 |                                                                 | [item-churn](https://relbench.stanford.edu/datasets/rel-amazon/#item-churn)          |     | classification (AUROC) | –                           | **0.828**     | 0.818           |
@@ -126,14 +128,14 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 |                                                                 | [user-repeat](https://relbench.stanford.edu/datasets/rel-event/#user-repeat)         |     | classification (AUROC) | –                           | **0.769**     | –               |
 |                                                                 | [user-ignore](https://relbench.stanford.edu/datasets/rel-event/#user-ignore)         |     | classification (AUROC) | –                           | **0.816**     | –               |
 | [rel-f1](https://relbench.stanford.edu/datasets/rel-f1)         | [driver-dnf](https://relbench.stanford.edu/datasets/rel-f1/#driver-dnf)              |     | classification (AUROC) | –                           | **0.726**     | 0.698           |
-|                                                                 | [driver-top3](https://relbench.stanford.edu/datasets/rel-f1/#driver-top3)            |     | classification (AUROC) | –                           | **0.755**     | 0.824           |
+|                                                                 | [driver-top3](https://relbench.stanford.edu/datasets/rel-f1/#driver-top3)            |     | classification (AUROC) | –                           | 0.755     | **0.824**           |
 |                                                                 | [driver-position](https://relbench.stanford.edu/datasets/rel-f1/#driver-position)    |     | regression (MAE)       | –                           | 4.022         | **3.963**       |
 | [rel-hm](https://relbench.stanford.edu/datasets/rel-hm)         | [user-churn](https://relbench.stanford.edu/datasets/rel-hm/#user-churn)              |  [hm-churn.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb) | classification (AUROC) | [**0.707**](hm-churn.ipynb) | 0.699         | 0.690           |
 |                                                                 | [item-sales](https://relbench.stanford.edu/datasets/rel-hm/#item-sales)              |  [hm-item.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-item.ipynb) | regression (MAE)       | [**0.031**](hm-item.ipynb)  | 0.056         | 0.036           |
 | [rel-stack](https://relbench.stanford.edu/datasets/rel-stack)   | [user-engagement](https://relbench.stanford.edu/datasets/rel-stack/#user-engagement) |     | classification (AUROC) | –                           | **0.906**     | 0.903           |
 |                                                                 | [user-badge](https://relbench.stanford.edu/datasets/rel-stack/#user-badge)           |     | classification (AUROC) | –                           | **0.889**     | 0.862           |
 |                                                                 | [post-votes](https://relbench.stanford.edu/datasets/rel-stack/#post-votes)           |     | regression (MAE)       | –                           | 0.065         | 0.065           |
-| [rel-trial](https://relbench.stanford.edu/datasets/rel-trial)   | [study-outcome](https://relbench.stanford.edu/datasets/rel-trial/#study-outcome)     |     | classification (AUROC) | –                           | **0.686**     | 0.720           |
+| [rel-trial](https://relbench.stanford.edu/datasets/rel-trial)   | [study-outcome](https://relbench.stanford.edu/datasets/rel-trial/#study-outcome)     |     | classification (AUROC) | –                           | 0.686     | **0.720**           |
 |                                                                 | [study-adverse](https://relbench.stanford.edu/datasets/rel-trial/#study-adverse)     |     | regression (MAE)       | –                           | 44.473        | **40.581**      |
 |                                                                 | [site-success](https://relbench.stanford.edu/datasets/rel-trial/#site-success)       |     | regression (MAE)       | –                           | **0.400**     | 0.407           |
 
@@ -143,17 +145,4 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 
 We're excited to see your innovative solutions and contributions to the getML community. Good luck, happy coding, and let's push the boundaries of automated feature engineering together!
 
-**We're Here to Support You!**
-
-Join our [Discord](https://discord.gg/B4cC9uZHdx) for technical guidance, feedback on your approaches, and to interact with the getML dev team. We're committed to helping you succeed in this challenge.
-
-## Notebook License
-
-The submitted notebook needs the following markdown inside a cell at the bottom of the notebook.
-```markdown
-**Code License:**
-All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
-
-**Text and Images License:**
-All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-```
+**You can count on our support:** Join our [Discord](https://discord.gg/B4cC9uZHdx) for technical guidance, feedback on your approaches, and to interact with the getML dev team. We're committed to helping you succeed in this challenge.
