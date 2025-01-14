@@ -89,17 +89,22 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * Once you feel that your notebook is ready for merge, mark your PR as **Ready for Review**.
    * We´ll review your PR and add feedback and suggestions where we see fit.
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
-7. **After merging the PR**
-   * In order that the correct person receives the [reward](#rewards--recognition) without the contributer having to share their email publically, follow these steps.
-   * Use our [tool](https://getml.com/relbench/encrypt) to encrypt your email address.
-   * Post your encrypted email address in the PR. This way we can keep your email address private and verify the receiver.
-   * Get in touch with us on [Discord](https://discord.gg/B4cC9uZHdx) or write us an [email](mailto://support@getml.com) if you need any assistance.
+7. **After Merging the PR**
+   * We will contact you for the [reward](#rewards--recognition) using the email address associated with your commit. Alternatively, you can [securely provide us with a contact email address](#how-to-receive-the-reward) to facilitate communication.
+   * If you need assistance, feel free to reach out to us on [Discord](https://discord.gg/B4cC9uZHdx) or send an [email](mailto:support@getml.com) to our support team.
 
 ### Rewards & Recognition
 
-1. Receive a €100 gift for each successfully merged notebook that beats at least one baseline.
-2. We'll happily connect your name and socials with the result on our communication channels, once you agree.
+1. Earn a €100 gift for each successfully merged notebook that outperforms at least one baseline.
+2. With your consent, we will gladly associate your name and social media profiles with the results on our communication channels.
 
+### How to Receive the Reward
+
+We offer two methods to deliver the €100 gift: through [GitHub Sponsors](https://docs.github.com/en/sponsors/receiving-sponsorships-through-github-sponsors/about-github-sponsors-for-open-source-contributors) or via [PayPal](https://paypal.com).
+* We will contact you using the email address associated with your commit to gather the necessary details.
+* If you are using [GitHub’s privacy feature](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) to keep your email private, or if you prefer us to contact you at a different email address, please follow these steps:
+   1. To ensure the reward is delivered to the correct person without requiring you to publicly share your email address, use our [encryption tool](https://getml.com/relbench/encrypt) to securely encrypt your email.
+   2. Include the encrypted email address in your PR. This method allows us to maintain your privacy while verifying the recipient.
 
 ## Get Started with getML FastProp
 
