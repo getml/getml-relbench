@@ -4,12 +4,18 @@ Welcome to the [getML](https://getml.com/) Community x RelBench Challenge! This 
 
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
-* **Build better models faster:** Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data to deliver more accurate prediction models without the likes of manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
-* **Gain recognition and rewards:**  Showcase your skills, climb the leaderboards, and earn a €100 gift card for every accepted submission. Your contributions could be featured in community spotlights and future publications!
-* **Expand your network:**  Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
+* **Build better models faster:**
+Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data to deliver more accurate prediction models without manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
+
+* **Gain recognition and rewards:**  Showcase your skills, climb the leaderboards, and receive €100 as a token of our gratitude for every accepted submission. Your contributions may also be featured in community spotlights and future publications!
+
+* **Expand your network:**
+Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
 
-> This challenge will be open for submissions starting from the 20th of January 2025!
+> This challenge will be open for submissions starting on the 20th of January 2025 at 16:00 CET!
+
+> We will continously add new challenges on a weekly basis until we run out of tasks. New challenges will be added on 27th of January at 16:00 CET.
 
 ## What is Relational Learning?
 
@@ -19,16 +25,16 @@ Relational data, often found in databases with multiple linked tables, poses a s
 
 ### getML FastProp
 
-At the heart of [getML-community](https://github.com/getml/getml-community) lies [FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop), our open-source algorithm specifically designed for efficient feature engineering on relational data. FastProp, short for fast propositionalization, seamlessly transforms complex relational data into a single table format, making it compatible with any machine learning algorithm. This automation not only saves you valuable time and effort but also has the potential to reveal hidden patterns crucial for accurate predictions.
+At the heart of [getML-community](https://github.com/getml/getml-community) lies [FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop), our open-source algorithm specifically designed for efficient feature engineering on relational data. FastProp seamlessly transforms complex relational data into a single table format, making it compatible with any machine learning algorithm. This automation not only saves you valuable time and effort but also has the potential to reveal hidden patterns crucial for accurate predictions.
 
-* **Unmatched Speed:**  It's engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
+* **Unmatched Speed:**  It is engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
 * **Simplicity:** FastProp seamlessly integrates with the MLOps ecosystem, making it incredibly easy to incorporate into your workflow.
 * **Enhanced Productivity:** By streamlining the tedious process of feature engineering, getML FastProp allows you to focus on the business critical aspects of your project, and not thousands of lines of SQL.
 
 
 ### Introducing RelBench
 
-[RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for comparison. 
+[RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for research. They created two baselines for comparison: 
 
 * **How did human data scientists work?** In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
 * **What is RDL?** Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
@@ -46,6 +52,15 @@ This challenge invites you to apply your data science skills and creativity to a
     * Effective use of getML: Demonstrate a good understanding of getML data models and how to tune them for optimal performance.
     * Performance: Aim to outperform at least one of the existing [RelBench baselines](#pick-a-challenge).
     * Sound and reproducible code:  Well-structured, modern and commented code that others can easily understand and execute.
+- **What you should bring:**
+    * basic python skills
+    * scikit learn or similar datascience library experience
+    * time to get to know getML FastProp by using the [example notebooks](#get-started-with-getml-fastprop) and [user guide](https://getml.com/latest/user_guide/)
+- **Why are we doing this:**
+    * to build a user base and community
+    * gather valuable feedback from users
+
+Remember, everything is allowed, use all tools available, search engines, llms or asking us on [Discord](https://discord.gg/B4cC9uZHdx). 
 
 Ready to take on the challenge? Choose a task and start building your solution!
 
@@ -56,11 +71,11 @@ Ready to take on the challenge? Choose a task and start building your solution!
 2. **Open a Draft PR:** 
    * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.
    * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).
-   * This reserves the task for you. No one else can claim it while your Draft PR is open.
+   * This reserves the task for you. No one else can claim it while you are actively working on your open Draft PR.
 3. **Build a Predictor that Uses FastProp:**
    * Develop your solution, using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.
    * Document your code, pipeline, and reasoning clearly in the notebook.
-   * We highly encourage you to use a regression or classification model of your choice on top of the generated features.
+   * We encourage you to use a regression or classification model of your choice on top of the getML-generated features.
 4. **Stay Active:**
    * Push updates to your PR on a rolling basis.
    * If there's no activity for 5 days, we might close the Draft PR to free up the task for others.
@@ -75,23 +90,23 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * We´ll review your PR and add feedback and suggestions where we see fit.
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
 7. **After merging the PR**
-   * You will receive a €100 voucher as a thank you for your contribution.
-   * You will receive public credit for your submission, and your name will be tied to it.
-   * You will receive a notable mention in any follow-up studies or publications related to this challenge.
-
+   * In order that the correct person receives the [reward](#rewards--recognition) without the contributer having to share their email publically, follow these steps.
+   * Use our [tool](https://getml.com/relbench/encrypt) to encrypt your email address.
+   * Post your encrypted email address in the PR. This way we can keep your email address private and verify the receiver.
+   * Get in touch with us on [Discord](https://discord.gg/B4cC9uZHdx) or write us an [email](mailto://support@getml.com) if you need any assistance.
 
 ### Rewards & Recognition
 
-1.  €100 Gift Card: A €100 gift card for each successfully merged notebook that beats at least one baseline.
-2.  Community Spotlight: We'll announce your contribution on our communication channels, only if you agree.
+1. Receive a €100 gift for each successfully merged notebook that beats at least one baseline.
+2. We'll happily connect your name and socials with the result on our communication channels, once you agree.
 
 
 ## Get Started with getML FastProp
 
 We've prepared two example notebooks to help you get started:
 
-* [`hm-churn.ipynb`](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb): A classification example using the H&M dataset, showcasing how to predict customer churn.
-* [`hm-item.ipynb`](https://github.com/getml/getml-relbench/blob/2-benchmark-challenge/hm-item.ipynb): A regression example using the H&M dataset, demonstrating how to forecast item sales using FastProp together with LightGBM and Optuna.
+* [`hm-churn.ipynb`](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb): A classification example using the H&M dataset, showcasing how to predict customer churn
+* [`hm-item.ipynb`](https://github.com/getml/getml-relbench/blob/2-benchmark-challenge/hm-item.ipynb): A regression example using the H&M dataset, demonstrating how to forecast item sales using FastProp together with LightGBM and Optuna
 
 These notebooks provide a practical introduction to the getML workflow, from data loading and preprocessing to pipeline construction and evaluation.
 
@@ -105,8 +120,7 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
  * **Collaboration**: Actively participate by addressing feedback provided on your PR.
  * **Reproducibility**: Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
  * **Leaderboard**: Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
- * **Licensing**: The submitted notebook needs to contain the below license infromation in a dedicated cell:
-
+ * **Licensing**: The submitted notebook needs to contain the below license information in a dedicated cell:
 
 ```markdown
 **License:**
@@ -115,7 +129,6 @@ All code in this notebook is licensed under the [MIT License](https://mit-licens
 
 Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 ```
-
 
 
 ## Pick a Challenge
