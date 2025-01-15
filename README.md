@@ -15,7 +15,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 
 > This challenge will be open for submissions starting on the 20th of January 2025 at 16:00 CET!
 
-> We will continously add new challenges on a weekly basis until we run out of tasks. New challenges will be added on 27th of January at 16:00 CET.
+> We will continously add new challenges periodically until we run out of tasks. New challenges will be added on 20th of January at 16:00 CET.
 
 ## What is Relational Learning?
 
