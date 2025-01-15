@@ -1,68 +1,128 @@
-import sys
+import gc
 import logging
-import pandas as pd
+from pathlib import Path
+
 import lightgbm as lgb
 import optuna
+import pyarrow as pa
+import pyarrow.parquet as pq
 from sklearn.metrics import mean_absolute_error
 
-##############################################################################
-# 1. Set up dedicated logging
-# #############################################################################
-logging.basicConfig(
-    filename="opt-hm-item.log",    # File where all logs will be written
-    level=logging.INFO,             # You can switch to DEBUG for more detail
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
 logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(message)s")
+
+FEATURES_PARQUET_PATH_TEMPLATE = "hm_item_pipe_refined_{subset}_features.parquet"
+FEATURES_LGBM_BIN_PATH_TEMPLATE = "hm_item_pipe_refined_{subset}_features.bin"
+FEATURES_DROP_COLS = ["sales", "article_id", "timestamp"]
+
+LGBM_NUM_BOOST_ROUND = 2000
+LGBM_EARLY_STOPPING_ROUNDS = 50
+LGBM_LOG_EVALUATION_PERIOD = 0
+LGBM_VERBOSE_EVAL = False
+
+OPTUNA_STUDY_NAME = "opt-hm-item"
+OPTUNA_STORAGE_URL = f"sqlite:///{OPTUNA_STUDY_NAME}.db"
+
+################################################################################
+# 1. Load data and preprocess
+# ##############################################################################
+
+train_arrow = pq.read_table(
+    FEATURES_PARQUET_PATH_TEMPLATE.format(subset="train"), memory_map=True
+)
+val_arrow = pq.read_table(
+    FEATURES_PARQUET_PATH_TEMPLATE.format(subset="val"), memory_map=True
+)
+test_arrow = pq.read_table(
+    FEATURES_PARQUET_PATH_TEMPLATE.format(subset="test"), memory_map=True
+)
+
+
+def encode_categoricals(table):
+    categical_cols = []
+    for name in table.column_names:
+        if pa.types.is_dictionary(table.column(name).type):
+            table = table.append_column(
+                f"{name}_encoded",
+                pa.chunked_array(chunk.indices for chunk in table.column(name).chunks),
+            )
+            categical_cols.append(f"{name}_encoded")
+    return table, categical_cols
+
+
+def select_columns(table):
+    return table.select(
+        [
+            name
+            for name in table.column_names
+            if (
+                pa.types.is_integer(table.column(name).type)
+                or pa.types.is_floating(table.column(name).type)
+            )
+            and name not in FEATURES_DROP_COLS
+        ]
+    )
+
+
+X_train, categorical_cols = encode_categoricals(select_columns(train_arrow))
+y_train = train_arrow["sales"]
+
+X_val, _ = encode_categoricals(select_columns(val_arrow))
+y_val = val_arrow["sales"]
+
+X_test, _ = encode_categoricals(select_columns(test_arrow))
+y_test = test_arrow["sales"]
 
 
 ###############################################################################
-# 2. Load data and preprocess
-# ##############################################################################
-train_df = pd.read_parquet("train_features_final-hm-item.parquet")
-val_df = pd.read_parquet("val_features_final-hm-item.parquet")
-test_df = pd.read_parquet("test_features_final-hm-item.parquet")
+# 2. Create LightGBM datasets
+###############################################################################
 
-X_train = train_df.drop(columns=["sales", "article_id", "timestamp"])
-y_train = train_df["sales"]
 
-X_val = val_df.drop(columns=["sales", "article_id", "timestamp"])
-y_val = val_df["sales"]
+def create_binary_dataset(X, y, categorical_cols, file_name, reference=None):
+    """
+    Create a LightGBM dataset as a binary dataset file. Manually free up memory
+    and return a pointer to the dataset file.
+    """
+    dataset = lgb.Dataset(
+        X,
+        label=y,
+        categorical_feature=categorical_cols,
+        free_raw_data=False,
+        reference=reference,
+    )
+    path = Path(file_name)
+    if path.exists():
+        path.unlink()
+    dataset.save_binary(path)
+    del dataset
+    gc.collect()
+    return lgb.Dataset(path, free_raw_data=False)
 
-X_test = test_df.drop(columns=["sales", "article_id", "timestamp"])
-y_test = test_df["sales"]
 
-def convert_object_columns(df):
-    for col in df.select_dtypes(include=["object"]).columns:
-        try:
-            df[col] = df[col].astype(int)
-        except (ValueError, TypeError):
-            df[col] = df[col].astype("category")
-    return df
-
-X_train = convert_object_columns(X_train)
-X_val = convert_object_columns(X_val)
-X_test = convert_object_columns(X_test)
-
-categorical_cols = X_train.select_dtypes(include=["category"]).columns.tolist()
-
-train_data = lgb.Dataset(
-    X_train, label=y_train, 
-    categorical_feature=categorical_cols,
-    free_raw_data=False
+train = create_binary_dataset(
+    X_train,
+    y_train,
+    categorical_cols,
+    FEATURES_LGBM_BIN_PATH_TEMPLATE.format(subset="train"),
 )
-val_data = lgb.Dataset(
-    X_val, label=y_val, 
-    categorical_feature=categorical_cols,
-    free_raw_data=False
+val = create_binary_dataset(
+    X_val,
+    y_val,
+    categorical_cols,
+    FEATURES_LGBM_BIN_PATH_TEMPLATE.format(subset="val"),
+    reference=train,
 )
+
 
 ###############################################################################
 # 3. Define objective function
 # ##############################################################################
+
+
 def objective(trial):
     params = {
+        "two_round": True,  # enable two_round loading for dataset two save memory
         "objective": "regression_l1",
         "metric": "mae",
         "verbosity": -1,
@@ -80,45 +140,43 @@ def objective(trial):
 
     model = lgb.train(
         params,
-        train_data,
-        num_boost_round=2000,
-        valid_sets=[val_data],
+        train,
+        num_boost_round=LGBM_NUM_BOOST_ROUND,
+        valid_sets=[val],
         callbacks=[
-            # Verbose stopping feedback
-            lgb.early_stopping(stopping_rounds=50, verbose=True),
-            # Log evaluation every x rounds
-            lgb.log_evaluation(period=0), # period=0 suppresses iteration logs
-        ]
+            lgb.early_stopping(
+                stopping_rounds=LGBM_EARLY_STOPPING_ROUNDS, verbose=True
+            ),
+            lgb.log_evaluation(period=LGBM_LOG_EVALUATION_PERIOD),
+        ],
     )
 
-    # Predict on validation set
     pred_val = model.predict(X_val, num_iteration=model.best_iteration)
     mae_val = mean_absolute_error(y_val, pred_val)
 
-    # Log the result for this trial
     logger.info(
         f"Trial {trial.number} finished with MAE={mae_val:.6f}, params={trial.params}"
     )
-    
+
     return mae_val
+
 
 ###############################################################################
 # 4. Create or load an Optuna study from SQLite for resuming
 # ##############################################################################
-storage_url = "sqlite:///opt-hm-item.db"
-study_name = "opt-hm-item"
 
 study = optuna.create_study(
-    study_name=study_name,
-    storage=storage_url,
+    study_name=OPTUNA_STUDY_NAME,
+    storage=OPTUNA_STORAGE_URL,
     load_if_exists=True,
     direction="minimize",
 )
-logger.info("Starting Optuna study...")
+logger.info(f"Starting Optuna study {OPTUNA_STUDY_NAME!r}...")
 
 ###############################################################################
 # 5. Run optimization
 # ##############################################################################
+
 study.optimize(objective, n_trials=50)
 
 best_params = study.best_params
@@ -132,15 +190,16 @@ logger.info(f"Best params: {best_params}")
 ###############################################################################
 # 6. Final model training with best parameters
 # ##############################################################################
+
 final_model = lgb.train(
     best_params,
-    train_data,
-    num_boost_round=2000,
-    valid_sets=[val_data],
+    train,
+    num_boost_round=LGBM_NUM_BOOST_ROUND,
+    valid_sets=[val],
     callbacks=[
-        lgb.early_stopping(stopping_rounds=50, verbose=True),
-        lgb.log_evaluation(period=0),  # No iteration logs, only final result
-    ]
+        lgb.early_stopping(stopping_rounds=LGBM_EARLY_STOPPING_ROUNDS, verbose=True),
+        lgb.log_evaluation(period=LGBM_LOG_EVALUATION_PERIOD),
+    ],
 )
 
 pred_test = final_model.predict(X_test, num_iteration=final_model.best_iteration)
