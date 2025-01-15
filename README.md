@@ -7,7 +7,7 @@ Ready to elevate your data science skills and make a real impact? Here's what aw
 * **Build better models faster:**
 Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data to deliver more accurate prediction models without manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
 
-* **Gain recognition and rewards:**  Showcase your skills, climb the leaderboards, and receive €100 as a token of our gratitude for every accepted submission. Your contributions may also be featured in community spotlights and future publications!
+* **Gain recognition and rewards:**  Showcase your skills by surpassing benchmark scores with the help of getML, and receive €100 as a token of our gratitude for every accepted submission. Your contributions may also be featured in community spotlights and future publications!
 
 * **Expand your network:**
 Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
