@@ -1,6 +1,6 @@
-# getML Community x RelBench Challenge
+# getML Community Data Science Challenge
 
-Welcome to the [getML](https://getml.com/) Community x RelBench Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
+Welcome to the [getML](https://getml.com/) Community Data Science Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
 
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
@@ -14,7 +14,7 @@ Showcase your skills by surpassing benchmark scores with the help of getML, and 
 Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
 > [!NOTE]
-> This challenge will be open for submissions starting on the **20th of January 2025 at 16:00 CET!**
+> This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
 
 > [!NOTE]
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
@@ -56,7 +56,7 @@ In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-u
 Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
 
 
-## Let's Bring it Together - The getML x RelBench Challenge
+## Let's Bring it Together - The getML Community Data Science Challenge
 
 ### Take on the Challenge
 
@@ -216,6 +216,22 @@ Afterwards, [install uv](https://docs.astral.sh/uv/getting-started/installation/
 uv run jupyter lab
 ```
 
-You are always free to use any other project manger of your choice but we recommend to stick to `uv`.
+You are always free to use any other project manger of your choice but we recommend to stick to [uv](https://pypi.org/project/uv/).
 
-**Happy coding!**
+### Memory and External Compute Resources
+
+For larger tasks and datasets, the size of the data might exceed the memory capacity of your local machine. One solution is to use the [memory mapping feature](https://getml.com/latest/reference/engine/engine/#getml.engine.launch), but keep in mind that this can significantly increase compute time.
+
+We recommend leveraging virtual machines from major cloud providers to handle such workloads. Many providers offer free trials or starter budgets that should cover your needs:  
+
+- [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
+- [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)  
+- [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free-1/?source=v1-TECH-JumpNav-j2204-20241205)  
+
+## Terms of Service
+
+For complete details regarding the terms of service, please refer to the [TOS.md file](./TOS.md). This document outlines all the guidelines, rules, and conditions associated with participation, including data protection, eligibility, and usage of resources.
+
+---
+
+### **Happy coding!**
