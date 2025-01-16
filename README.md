@@ -13,8 +13,10 @@ Showcase your skills by surpassing benchmark scores with the help of getML, and 
 * **Expand your network:**  
 Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
+> [!NOTE]
 > This challenge will be open for submissions starting on the **20th of January 2025 at 16:00 CET!**
 
+> [!NOTE]
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
 
 
@@ -135,7 +137,7 @@ We offer two methods to deliver the €100 gift: through [GitHub Sponsors](https
 We've prepared two example notebooks to help you get started:
 
 * [`hm-churn.ipynb`](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb): A classification example using the H&M dataset, showcasing how to predict customer churn
-* [`hm-item.ipynb`](https://github.com/getml/getml-relbench/blob/2-benchmark-challenge/hm-item.ipynb): A regression example using the H&M dataset, demonstrating how to forecast item sales using FastProp together with LightGBM and Optuna
+* [`hm-item.ipynb`](https://github.com/getml/getml-relbench/blob/main/hm-item.ipynb): A regression example using the H&M dataset, demonstrating how to forecast item sales using FastProp together with LightGBM and Optuna
 
 These notebooks provide a practical introduction to the getML workflow, from data loading and preprocessing to pipeline construction and evaluation.
 
