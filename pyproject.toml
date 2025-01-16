@@ -1,0 +1,15 @@
+[project]
+name = "getml-relbench"
+version = "0.1.0"
+description = "Applying getML to relbench datasets"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "getml>=1.5.0",
+    "ipywidgets>=8.1.5",
+    "jupyterlab>=4.3.4",
+    "lightgbm>=4.5.0",
+    "optuna>=4.1.0",
+    "relbench>=1.1.0",
+    "scikit-learn>=1.6.1",
+]
