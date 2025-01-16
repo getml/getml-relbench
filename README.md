@@ -4,18 +4,19 @@ Welcome to the [getML](https://getml.com/) Community x RelBench Challenge! This 
 
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
-* **Build better models faster:**
-Learn how to use getML FastProp (short for Fast Propositionalization) for automated features extraction from relational and time-series data to deliver more accurate prediction models without manual SQL or deep business domain expertise. [getml-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbo-charge your next predictive analytics project and beyond!
+* **Build better models faster:**  
+Learn how to use getML FastProp (short for Fast Propositionalization) for automated feature extraction from relational and time-series data to deliver more accurate prediction models without manual SQL or deep business domain expertise. [getML-community](https://github.com/getml/getml-community) is open source (ELv2), so you can keep using it to turbocharge your next predictive analytics project and beyond!
 
-* **Gain recognition and rewards:**  Showcase your skills by surpassing benchmark scores with the help of getML, and receive €100 as a token of our gratitude for every accepted submission. Your contributions may also be featured in community spotlights and future publications!
+* **Gain recognition and rewards:**  
+Showcase your skills by surpassing benchmark scores with the help of getML, and receive €100 as a token of our gratitude for every accepted submission. Your contributions may also be featured in community spotlights and future publications!
 
-* **Expand your network:**
+* **Expand your network:**  
 Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
+> This challenge will be open for submissions starting on the **20th of January 2025 at 16:00 CET!**
 
-> This challenge will be open for submissions starting on the 20th of January 2025 at 16:00 CET!
+> We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
 
-> We will periodically add new challenges until we run out of tasks. New challenges will be added on 20th of January at 16:00 CET.
 
 ## Motivation
 
@@ -38,82 +39,96 @@ Relational data, often found in databases with multiple linked tables, poses a s
 
 At the heart of [getML-community](https://github.com/getml/getml-community) lies [FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop), our open-source algorithm specifically designed for efficient feature engineering on relational data. FastProp seamlessly transforms complex relational data into a single table format, making it compatible with any machine learning algorithm. This automation not only saves you valuable time and effort but also has the potential to reveal hidden patterns crucial for accurate predictions.
 
-* **Unmatched Speed:**  It is engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
+* **Unmatched Speed:** It is engineered for speed, surpassing many existing methods in benchmarks. ([See the results](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks)).
 * **Simplicity:** FastProp seamlessly integrates with the MLOps ecosystem, making it incredibly easy to incorporate into your workflow.
-* **Enhanced Productivity:** By streamlining the tedious process of feature engineering, getML FastProp allows you to focus on the business critical aspects of your project, and not thousands of lines of SQL.
-
+* **Enhanced Productivity:** By streamlining the tedious process of feature engineering, getML FastProp allows you to focus on the business-critical aspects of your project, and not thousands of lines of SQL.
 
 ### Introducing RelBench
 
-[RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for research. They created two baselines for comparison: 
+[RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for research. They created two baselines for comparison:  
 
-* **How did human data scientists work?** In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
-* **What is RDL?** Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
+* **How did human data scientists work?**  
+In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
+
+* **What is RDL?**  
+Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
 
 
-## Let's Bring it Together - The getML x Relbench Challenge
+## Let's Bring it Together - The getML x RelBench Challenge
 
 ### Take on the Challenge
 
-We've been busy putting [getML FastProp](https://github.com/getml/getml-community) to the test on RelBench, and the results are [quite impressive](#get-started-with-getml-fastprop)!  We've already surpassed both RDL and human baselines on two tasks, and we believe there's plenty more potential to unlock. Now, it's your turn to explore the power of getML and see what you can achieve.
+We've been busy putting [getML FastProp](https://github.com/getml/getml-community) to the test on RelBench, and the results are [quite impressive](#get-started-with-getml-fastprop)! We've already surpassed both RDL and human baselines on two tasks, and we believe there's plenty more potential to unlock. Now, it's your turn to explore the power of getML and see what you can achieve.
 
 This challenge invites you to apply your data science skills and creativity to a series of unsolved RelBench tasks. We encourage you to experiment with getML FastProp, combine it with your favorite machine learning models, and see if you can surpass the existing baselines – and maybe even our own scores!
 
 - **This is what we are looking for:**
-    * Effective use of getML: Demonstrate a good understanding of getML data models and how to tune them for optimal performance.
-    * Performance: Aim to outperform at least one of the existing [RelBench baselines](#pick-a-challenge).
-    * Sound and reproducible code:  Well-structured, modern and commented code that others can easily understand and execute.
-- **What you should bring:**
-    * basic python skills
-    * scikit learn or similar datascience library experience
-    * time to get to know getML FastProp by using the [example notebooks](#get-started-with-getml-fastprop) and [user guide](https://getml.com/latest/user_guide/)
+  * Effective use of getML: Demonstrate a good understanding of getML data models and how to tune them for optimal performance.
+  * Performance: Aim to outperform at least one of the existing [RelBench baselines](#pick-a-challenge).
+  * Sound and reproducible code: Well-structured, modern, and commented code that others can easily understand and execute.
 
-Remember, everything is allowed, use all tools available, search engines, llms or asking us on [Discord](https://discord.gg/B4cC9uZHdx). 
+- **What you should bring:**
+  * Basic Python skills.
+  * Experience with scikit-learn or similar data science libraries.
+  * Time to get to know getML FastProp by using the [example notebooks](#get-started-with-getml-fastprop) and [user guide](https://getml.com/latest/user_guide/).
+
+Remember, everything is allowed: use all tools available, search engines, LLMs, or ask us on [Discord](https://discord.gg/B4cC9uZHdx).
 
 Ready to take on the challenge? Choose a task and start building your solution!
 
+
 ### This is How You Participate
 
-1. **Pick an Unsolved Task:**
-   * Refer to the [table in this repo's README](#pick-a-challenge) or [issues](https://github.com/getml/getml-relbench/issues/7) to find tasks without an open Draft Pull Request (PR).
+1. **Pick an Unsolved Task:**  
+   * Refer to the [table in this repo's README](#pick-a-challenge) or [issues](https://github.com/getml/getml-relbench/issues/7) to find tasks without an open Draft Pull Request (PR).  
    * You may have only one active pull request (PR) at a time and can complete a maximum of two tasks in total.
-2. **Open a Draft PR:** 
-   * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.
-   * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).
+
+2. **Open a Draft PR:**  
+   * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.  
+   * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).  
    * This reserves the task for you. No one else can claim it while you are actively working on your open Draft PR.
-3. **Build a Predictor that Uses FastProp:**
-   * Develop your solution, using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.
-   * Document your code, pipeline, and reasoning clearly in the notebook.
+
+3. **Build a Predictor that Uses FastProp:**  
+   * Develop your solution using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.  
+   * Document your code, pipeline, and reasoning clearly in the notebook.  
    * We encourage you to use a regression or classification model of your choice on top of the getML-generated features.
-4. **Stay Active:**
-   * Push updates to your PR on a rolling basis.
-   * If there's no commit, active discussion or interaction which helps to progress the completion of the task for 5 days, we might close the Draft PR to free up the task for others.
-   * We'll answer question, provide comments or suggestions to your Draft PR on a rolling basis within 5 days.
+
+4. **Stay Active:**  
+   * Push updates to your PR on a rolling basis.  
+   * If there’s no commit, active discussion, or interaction which helps to progress the completion of the task for 5 days, we might close the Draft PR to free up the task for others.  
+   * We’ll answer questions, provide comments, or suggest improvements to your Draft PR on a rolling basis within 5 days.  
    * We reserve the right to decide if a PR is actively being worker on.
-5. **Aim to Beat Existing Scores:**
-   * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
-   * If you surpass at least one, that's excellent\!
-   * If not, don't worry. We'll provide feedback and support.
-6. **Get Your PR Merged and Address Feedback:**
-   * Once you feel that your notebook is ready for merge, mark your PR as **Ready for Review**.
-   * We'll review your PR and add feedback and suggestions where we see fit.
+5. **Aim to Beat Existing Scores:**  
+   * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).  
+   * If you surpass at least one, that’s excellent!  
+   * If not, don’t worry. We’ll provide feedback and support.
+
+6. **Get Your PR Merged and Address Feedback:**  
+   * Once you feel that your notebook is ready for merging, mark your PR as **Ready for Review**.  
+   * We’ll review your PR and provide feedback where needed.  
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
-7. **After Merging the PR**
-   * We will contact you for the [reward](#rewards--recognition) using the email address associated with your commit. Alternatively, you can [securely provide us with a contact email address](#how-to-receive-the-reward) to facilitate communication.
+
+7. **After Merging the PR:**  
+   * We will contact you for the [reward](#rewards--recognition) using the email address associated with your commit. Alternatively, you can [securely provide us with a contact email address](#how-to-receive-the-reward) to facilitate communication.  
    * If you need assistance, feel free to reach out to us on [Discord](https://discord.gg/B4cC9uZHdx) or send an [email](mailto:support@getml.com) to our support team.
+
+---
 
 ### Rewards & Recognition
 
-1. Earn a €100 gift for each successfully merged notebook that outperforms at least one baseline.
+1. Earn a €100 gift for each successfully merged notebook that outperforms at least one baseline.  
 2. With your consent, we will gladly associate your name and social media profiles with the results on our communication channels.
+
+---
 
 ### How to Receive the Reward
 
-We offer two methods to deliver the €100 gift: through [GitHub Sponsors](https://docs.github.com/en/sponsors/receiving-sponsorships-through-github-sponsors/about-github-sponsors-for-open-source-contributors) or via [PayPal](https://paypal.com).
-* We will contact you using the email address associated with your commit to gather the necessary details.
-* If you are using [GitHub's privacy feature](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) to keep your email private, or if you prefer us to contact you at a different email address, please follow these steps:
+We offer two methods to deliver the €100 gift: through [GitHub Sponsors](https://docs.github.com/en/sponsors/receiving-sponsorships-through-github-sponsors/about-github-sponsors-for-open-source-contributors) or via [PayPal](https://paypal.com).  
+* We will contact you using the email address associated with your commit to gather the necessary details.  
+* If you are using [GitHub’s privacy feature](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) to keep your email private, or if you prefer us to contact you at a different email address, please follow these steps:  
    1. To ensure the reward is delivered to the correct person without requiring you to publicly share your email address, use our [encryption tool](https://getml.com/relbench/encrypt) to securely encrypt your email.
    2. Include the encrypted email address in your PR. This method allows us to maintain your privacy while verifying the recipient.
+
 
 ## Get Started with getML FastProp
 
