@@ -151,6 +151,7 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
  * **Collaboration**: Actively participate by addressing feedback provided on your PR.
  * **Reproducibility**: Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
  * **Leaderboard**: Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
+ * **Used Libraries**: Any used libraries must be published under any [OSI approved license](https://opensource.org/licenses) or the [Elastic License](https://www.elastic.co/licensing/elastic-license)
  * **Licensing**: The submitted notebook needs to contain the below license information in a dedicated cell:
 
 ```markdown
@@ -195,3 +196,26 @@ Text and Images License: All non-code content (text, documentation, and images) 
 We're excited to see your innovative solutions and contributions to the getML community. Good luck, happy coding, and let's push the boundaries of automated feature engineering together!
 
 **You can count on our support:** Join our [Discord](https://discord.gg/B4cC9uZHdx) for technical guidance, feedback on your approaches, and to interact with the getML dev team. We're committed to helping you succeed in this challenge.
+
+### How to start and setup the environment
+
+To ease participation in the challenge, we have already prepared a base environment for you. To start hacking, you just need to clone this [repository](https://github.com/getml/getml-relbench.git) or clone your forked version of the repository.
+
+#### Linux
+To get started on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml):
+```sh
+uv run jupyter lab
+```
+#### macOS and Windows
+To get started on macOS and Windows, you first need to [start the getML docker service](https://getml.com/latest/install/packages/docker/):
+```sh
+curl https://raw.githubusercontent.com/getml/getml-community/1.5.0/runtime/docker-compose.yml | docker-compose up -f -
+```
+Afterwards, [install uv](https://docs.astral.sh/uv/getting-started/installation/) and use the [provided environment](pyproject.toml) as above:
+```sh
+uv run jupyter lab
+```
+
+You are always free to use any other project manger of your choice but we recommend to stick to `uv`.
+
+**Happy coding!**
