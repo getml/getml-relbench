@@ -17,6 +17,17 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on 20th of January at 16:00 CET.
 
+## Motivation
+
+At getML, we've seen firsthand how FastProp simplifies and accelerates feature engineering for relational and time-series data. By launching this challenge, we aim to share these benefits with the broader data science and engineering community.  
+
+Our goal is twofold:  
+1. **Empower you** to tackle relational data problems with ease by adding FastProp to your toolkit, enabling you to focus on insights rather than manual feature extraction.  
+2. **Collaborate with the community** to gather feedback, learn from real-world use cases, and continue enhancing FastProp based on your experiences.
+
+By participating, you'll not only advance your skills but also contribute to the development of cutting-edge, open-source tools that are shaping the future of learning on relational data.
+
+
 ## What is Relational Learning?
 
 ### The Problem with Relational Data
@@ -56,9 +67,6 @@ This challenge invites you to apply your data science skills and creativity to a
     * basic python skills
     * scikit learn or similar datascience library experience
     * time to get to know getML FastProp by using the [example notebooks](#get-started-with-getml-fastprop) and [user guide](https://getml.com/latest/user_guide/)
-- **Why are we doing this:**
-    * to build a user base and community
-    * gather valuable feedback from users
 
 Remember, everything is allowed, use all tools available, search engines, llms or asking us on [Discord](https://discord.gg/B4cC9uZHdx). 
 
@@ -68,6 +76,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
 
 1. **Pick an Unsolved Task:**
    * Refer to the [table in this repo's README](#pick-a-challenge) or [issues](https://github.com/getml/getml-relbench/issues/7) to find tasks without an open Draft Pull Request (PR).
+   * You may have only one active pull request (PR) at a time and can complete a maximum of two tasks in total.
 2. **Open a Draft PR:** 
    * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.
    * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).
@@ -78,16 +87,16 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * We encourage you to use a regression or classification model of your choice on top of the getML-generated features.
 4. **Stay Active:**
    * Push updates to your PR on a rolling basis.
-   * If there's no activity for 5 days, we might close the Draft PR to free up the task for others.
-   * Every meaningful commit, discussion or interaction resets the inactivty timer.
+   * If there's no commit, active discussion or interaction which helps to progress the completion of the task for 5 days, we might close the Draft PR to free up the task for others.
    * We'll answer question, provide comments or suggestions to your Draft PR on a rolling basis within 5 days.
+   * We reserve the right to decide if a PR is actively being worker on.
 5. **Aim to Beat Existing Scores:**
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).
    * If you surpass at least one, that's excellent\!
    * If not, don't worry. We'll provide feedback and support.
 6. **Get Your PR Merged and Address Feedback:**
    * Once you feel that your notebook is ready for merge, mark your PR as **Ready for Review**.
-   * We´ll review your PR and add feedback and suggestions where we see fit.
+   * We'll review your PR and add feedback and suggestions where we see fit.
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
 7. **After Merging the PR**
    * We will contact you for the [reward](#rewards--recognition) using the email address associated with your commit. Alternatively, you can [securely provide us with a contact email address](#how-to-receive-the-reward) to facilitate communication.
@@ -102,7 +111,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
 
 We offer two methods to deliver the €100 gift: through [GitHub Sponsors](https://docs.github.com/en/sponsors/receiving-sponsorships-through-github-sponsors/about-github-sponsors-for-open-source-contributors) or via [PayPal](https://paypal.com).
 * We will contact you using the email address associated with your commit to gather the necessary details.
-* If you are using [GitHub’s privacy feature](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) to keep your email private, or if you prefer us to contact you at a different email address, please follow these steps:
+* If you are using [GitHub's privacy feature](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) to keep your email private, or if you prefer us to contact you at a different email address, please follow these steps:
    1. To ensure the reward is delivered to the correct person without requiring you to publicly share your email address, use our [encryption tool](https://getml.com/relbench/encrypt) to securely encrypt your email.
    2. Include the encrypted email address in your PR. This method allows us to maintain your privacy while verifying the recipient.
 
@@ -119,7 +128,7 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 
 
 ## Submission Criteria
- * **Participation**: Submit a maximum of two PRs.
+ * **Participation**: Submit a maximum of two pull requests (PR), only one active PR at a time.
  * **FastProp is Key**: Utilize [getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/#getml.feature_learning.FastProp) for automated feature engineering in your solutions.
  * **Performance Goal**: Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
  * **Collaboration**: Actively participate by addressing feedback provided on your PR.
