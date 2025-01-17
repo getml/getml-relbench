@@ -88,7 +88,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
 2. **Open a Draft PR:**  
    * Review the [Terms of Service & Licensing](#terms-of-service--licensing) section and confirm your acceptance by including the specified details in your submission.
    * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.  
-   * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).  
+   * Title your branch as well as the PR: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).  
    * This reserves the task for you. No one else can claim it while you are actively working on your open Draft PR.
 
 3. **Build a Predictor that Uses FastProp:**  
