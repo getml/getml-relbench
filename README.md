@@ -13,12 +13,12 @@ Showcase your skills by surpassing benchmark scores with the help of getML, and 
 * **Expand your network:**  
 Connect with the getML dev team and other data scientists on our [Discord](https://discord.gg/B4cC9uZHdx). Share your knowledge, learn from others, and help shape the future of open-source automated feature engineering.
 
+**Enjoying what you see?** 🌟 We'd love for you to star our main repo, [getML-community repository](https://github.com/getml/getml-community). It's a great way to stay updated and show your support for our work! 🙌
+
 > [!NOTE]
 > This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
 > 
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
-
-**Enjoying what you see?** 🌟 We'd love for you to star our main repo, [getML-community repository](https://github.com/getml/getml-community). It's a great way to stay updated and show your support for our work! 🙌
 
 ## Our Motivation
 
