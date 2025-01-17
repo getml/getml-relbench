@@ -18,6 +18,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 > 
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
 
+:star: **Please consider to star our [getML-community repository](https://github.com/getml/getml-community)** :star:
 
 ## Our Motivation
 
