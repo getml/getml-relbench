@@ -211,7 +211,7 @@ We recommend leveraging virtual machines from major cloud providers to handle su
 
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
 - [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)  
-- [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free-1/?source=v1-TECH-JumpNav-j2204-20241205)  
+- [Oracle Cloud Free Tier](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier.htm#freetrial)  
 
 ## Terms of Service
 
