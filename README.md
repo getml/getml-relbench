@@ -49,11 +49,11 @@ At the heart of [getML-community](https://github.com/getml/getml-community) lies
 
 [RelBench](https://relbench.stanford.edu/), a project from SNAP (Stanford University), provides a standardized set of benchmark datasets and tasks for evaluating relational learning algorithms. It aims to accelerate research and development in this field by offering a common ground for research. They created two baselines for comparison:  
 
-* **How did human data scientists work?**  
+* **Manual Feature Engineering by an expert:**  
 In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-user-study/) manually engineered features using their domain expertise and knowledge of relational databases. This involved carefully selecting, aggregating, and transforming data from multiple tables to create informative features.
 
-* **What is RDL?**  
-Relational Deep Learning represents a category of approaches within relational learning that leverages mostly graph neural networks to learn features from relational data.
+* **Graph based neural networks:**  
+Relational Deep Learning (RDL) represents a category of approaches within relational learning that is [developed at SNAP](https://github.com/snap-stanford/relbench/tree/main/examples), which leverages mostly graph neural networks to learn features from relational data.
 
 
 ## Let's Bring it Together - The getML Community Data Science Challenge
