@@ -86,6 +86,7 @@ Ready to take on the challenge? Choose a task and start building your solution!
    * You may have only one active pull request (PR) at a time and can complete a maximum of two tasks in total.
 
 2. **Open a Draft PR:**  
+   * Review the [Terms of Service & Licensing](#terms-of-service--licensing) section and confirm your acceptance by including the specified details in your submission.
    * Create a [Draft Pull Request](https://github.com/getml/getml-relbench/compare) on the [getML relbench](https://github.com/getml/getml-relbench) GitHub repository.  
    * Title it: `[dataset-name]-[taskname]` (e.g., `rel-amazon-user-churn`).  
    * This reserves the task for you. No one else can claim it while you are actively working on your open Draft PR.
@@ -93,19 +94,22 @@ Ready to take on the challenge? Choose a task and start building your solution!
 3. **Build a Predictor that Uses FastProp:**  
    * Develop your solution using **[getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/)** for feature engineering.  
    * Document your code, pipeline, and reasoning clearly in the notebook.  
-   * We encourage you to use a regression or classification model of your choice on top of the getML-generated features.
+   * We encourage you to use a regression or classification model of your choice on top of the getML-generated features. (see our [examples](#get-started-with-getml-fastprop))
+   * Any used libraries must be published under any [OSI approved license](https://opensource.org/licenses) or the [Elastic License](https://www.elastic.co/licensing/elastic-license)
 
 4. **Stay Active:**  
-   * Push updates to your PR on a rolling basis.  
-   * If there’s no commit, active discussion, or interaction which helps to progress the completion of the task for 5 days, we might close the Draft PR to free up the task for others.  
-   * We’ll answer questions, provide comments, or suggest improvements to your Draft PR on a rolling basis within 5 days.  
-   * We reserve the right to decide if a PR is actively being worker on.
+   * Continuously push updates to your PR to show progress.  
+   * If there’s no commit, discussion, or meaningful interaction to advance the task within 5 days, we may close the Draft PR to make the task available to others.  
+   * We aim to respond to questions, provide feedback, or suggest improvements promptly. Any delays on our side will not count towards inactivity.  
+   * We reserve the right to determine if a PR is being actively worked on.  
+
 5. **Aim to Beat Existing Scores:**  
    * Compare your final metric against the existing [RelBench baselines](#pick-a-challenge) (RDL and Human).  
-   * If you surpass at least one, that’s excellent!  
-   * If not, don’t worry. We’ll provide feedback and support.
+   * Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
+   * If you surpass both, that’s excellent. We will consider to merge your PR immediately.
 
 6. **Get Your PR Merged and Address Feedback:**  
+   * Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
    * Once you feel that your notebook is ready for merging, mark your PR as **Ready for Review**.  
    * We’ll review your PR and provide feedback where needed.  
    * Your PR will be merged into the main branch if it meets the criteria and successfully addresses our feedback.
@@ -142,28 +146,6 @@ We've prepared two example notebooks to help you get started:
 These notebooks provide a practical introduction to the getML workflow, from data loading and preprocessing to pipeline construction and evaluation.
 
 Furhter information can be found in the **[User Guide](https://getml.com/latest/user_guide/)** and the **[API Reference](https://getml.com/latest/reference/)**.
-
-
-## Participation Criteria
- * **Participation**: Submit a maximum of two pull requests (PR), only one active PR at a time.
- * **FastProp is Key**: Utilize [getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/#getml.feature_learning.FastProp) for automated feature engineering in your solutions.
- * **Performance Goal**: Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
- * **Collaboration**: Actively participate by addressing feedback provided on your PR.
- * **Reproducibility**: Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
- * **Leaderboard**: Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
- * **Used Libraries**: Any used libraries must be published under any [OSI approved license](https://opensource.org/licenses) or the [Elastic License](https://www.elastic.co/licensing/elastic-license)
- * **Licensing & TOS**: The submitted notebook needs to contain the below license information and acknowledgement of the [terms of service (TOS)](./TOS.md) in a dedicated cell:
-
-```markdown
-**License:**
-
-All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
-
-Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-**Terms of serivce:**
-I, [GitHub username], hereby acknowledge that I have read, understood, and agree to the [Terms of Service of the getML Community Data Science Challenge](https://github.com/getml/getml-relbench/blob/main/TOS.md).
-```
 
 
 ## Pick a Challenge
@@ -215,9 +197,24 @@ We recommend leveraging virtual machines from major cloud providers to handle su
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
 - [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
 
-## Terms of Service
 
-For complete details regarding the terms of service, please refer to the [TOS.md file](./TOS.md). This document outlines all the guidelines, rules, and conditions associated with participation, including data protection, eligibility, and usage of resources.
+## Terms of Service & Licensing
+
+For complete details regarding the terms of service, please refer to the [terms of service (TOS)](./TOS.md). This document outlines all the guidelines, rules, and conditions associated with participation, including data protection, eligibility, and usage of resources.
+
+The submitted notebook needs to contain the below license information and acknowledgement of the [terms of service (TOS)](./TOS.md) in a dedicated cell:
+
+```markdown
+**License:**
+
+All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
+
+Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+**Terms of serivce:**
+I, [GitHub username], hereby acknowledge that I have read, understood, and agree to the [Terms of Service of the getML Community Data Science Challenge](https://github.com/getml/getml-relbench/blob/main/TOS.md).
+```
+
 
 ---
 
