@@ -1,8 +1,8 @@
-# getML Community Data Science Challenge
+# Data Science Challenge - getML Community
 
 ## 1. **Organizer**
 
-The organizer of the “getML Community Data Science Challenge” (hereinafter: “Challenge”) is Code17 GmbH, Spinnereistraße 7, 04179 Leipzig (hereinafter: “Organizer” or “we”).
+The organizer of the “Data Science Challenge - getML Community” (hereinafter: “Challenge”) is Code17 GmbH, Spinnereistraße 7, 04179 Leipzig (hereinafter: “Organizer” or “we”).
 
 ## 2. **Scope**
 

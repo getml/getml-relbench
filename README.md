@@ -1,6 +1,6 @@
-# getML Community Data Science Challenge
+# Data Science Challenge - getML Community
 
-Welcome to the [getML](https://getml.com/) Community Data Science Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
+Welcome to our [getML](https://getml.com/) Data Science Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
 
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
@@ -15,12 +15,10 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 
 > [!NOTE]
 > This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
-
-> [!NOTE]
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
 
 
-## Motivation
+## Our Motivation
 
 At getML, we've seen firsthand how FastProp simplifies and accelerates feature engineering for relational and time-series data. By launching this challenge, we aim to share these benefits with the broader data science and engineering community.  
 
@@ -56,7 +54,7 @@ In RelBench, [human data scientists](https://github.com/snap-stanford/relbench-u
 Relational Deep Learning (RDL) represents a category of approaches within relational learning that is [developed at SNAP](https://github.com/snap-stanford/relbench/tree/main/examples), which leverages mostly graph neural networks to learn features from relational data.
 
 
-## Let's Bring it Together - The getML Community Data Science Challenge
+## Let's Bring it Together
 
 ### Take on the Challenge
 
@@ -144,7 +142,7 @@ These notebooks provide a practical introduction to the getML workflow, from dat
 Furhter information can be found in the **[User Guide](https://getml.com/latest/user_guide/)** and the **[API Reference](https://getml.com/latest/reference/)**.
 
 
-## Submission Criteria
+## Participation Criteria
  * **Participation**: Submit a maximum of two pull requests (PR), only one active PR at a time.
  * **FastProp is Key**: Utilize [getML FastProp](https://getml.com/latest/reference/feature_learning/fastprop/#getml.feature_learning.FastProp) for automated feature engineering in your solutions.
  * **Performance Goal**: Strive to outperform at least one existing [RelBench baseline](#pick-a-challenge) (RDL or Human). We believe this is achievable for many of the challenges!
@@ -152,7 +150,7 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
  * **Reproducibility**: Submit a well-documented Jupyter Notebook that allows for easy reproduction of your results.
  * **Leaderboard**: Acknowledge in your PR that your score and name (if you choose to share it) may appear in public leaderboard announcements.
  * **Used Libraries**: Any used libraries must be published under any [OSI approved license](https://opensource.org/licenses) or the [Elastic License](https://www.elastic.co/licensing/elastic-license)
- * **Licensing**: The submitted notebook needs to contain the below license information in a dedicated cell:
+ * **Licensing & TOS**: The submitted notebook needs to contain the below license information and acknowledgement of the [terms of service (TOS)](./TOS.md) in a dedicated cell:
 
 ```markdown
 **License:**
@@ -160,6 +158,9 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 All code in this notebook is licensed under the [MIT License](https://mit-license.org/).
 
 Text and Images License: All non-code content (text, documentation, and images) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+**Terms of serivce:**
+I, [GitHub username], hereby acknowledge that I have read, understood, and agree to the [Terms of Service of the getML Community Data Science Challenge](https://github.com/getml/getml-relbench/blob/main/TOS.md).
 ```
 
 
@@ -205,7 +206,7 @@ You are always free to use any other project manger of your choice but we recomm
 
 ### Memory and External Compute Resources
 
-For larger tasks and datasets, the size of the data might exceed the memory capacity of your local machine. One solution is to use the [memory mapping feature](https://getml.com/latest/reference/engine/engine/#getml.engine.launch), but keep in mind that this can significantly increase compute time.
+For larger tasks and datasets, the size of the data might exceed the memory capacity of your local machine. One solution is to use the [memory mapping feature](https://getml.com/latest/reference/engine/engine/#getml.engine.launch), but keep in mind that this might increase compute time.
 
 We recommend leveraging virtual machines from major cloud providers to handle such workloads. Many providers offer free trials or starter budgets that should cover your needs:  
 
