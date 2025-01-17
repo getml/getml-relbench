@@ -122,7 +122,7 @@ val = create_binary_dataset(
 
 def objective(trial):
     params = {
-        "two_round": True,  # enable two_round loading for dataset two save memory
+        "two_round": False,  # enable two_round loading for dataset two save memory
         "objective": "regression_l1",
         "metric": "mae",
         "verbosity": -1,
@@ -177,7 +177,7 @@ logger.info(f"Starting Optuna study {OPTUNA_STUDY_NAME!r}...")
 # 5. Run optimization
 # ##############################################################################
 
-study.optimize(objective, n_trials=50)
+# study.optimize(objective, n_trials=50)
 
 best_params = study.best_params
 best_params["objective"] = "regression_l1"
@@ -205,7 +205,16 @@ final_model = lgb.train(
 pred_test = final_model.predict(X_test, num_iteration=final_model.best_iteration)
 test_mae = mean_absolute_error(y_test, pred_test)
 
+pred_val = final_model.predict(X_val, num_iteration=final_model.best_iteration)
+val_mae = mean_absolute_error(y_val, pred_val)
+
+pred_train = final_model.predict(X_train, num_iteration=final_model.best_iteration)
+train_mae = mean_absolute_error(y_train, pred_train)
+
+
 # Print final result to log
+logger.info(f"Final model Train MAE: {train_mae:.6f}")
+logger.info(f"Final model Val MAE: {val_mae:.6f}")
 logger.info(f"Final model Test MAE: {test_mae:.6f}")
 
 ###############################################################################

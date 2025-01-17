@@ -18,7 +18,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 > 
 > We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
 
-:star: **Please consider to star our [getML-community repository](https://github.com/getml/getml-community)** :star:
+**Enjoying what you see?** 🌟 We'd love for you to star our main repo, [getML-community repository](https://github.com/getml/getml-community). It's a great way to stay updated and show your support for our work! 🙌
 
 ## Our Motivation
 
@@ -213,8 +213,7 @@ For larger tasks and datasets, the size of the data might exceed the memory capa
 We recommend leveraging virtual machines from major cloud providers to handle such workloads. Many providers offer free trials or starter budgets that should cover your needs:  
 
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
-- [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)  
-- [Oracle Cloud Free Tier](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier.htm#freetrial)  
+- [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
 
 ## Terms of Service
 
