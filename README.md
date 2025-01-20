@@ -24,7 +24,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 > [!NOTE]
 > This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
 > 
-> We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
+> We will periodically add new challenges until we run out of tasks. New challenges will be added on the **27th of January at 16:00 CET.**
 
 ## Our Motivation
 
