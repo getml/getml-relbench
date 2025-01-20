@@ -157,7 +157,7 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 ## Pick a Challenge
 
 > [!NOTE]
-> New challenges will be added on the **20th of January at 16:00 CET.**
+> New challenges will be added on the **27th of January at 16:00 CET.**
 
 | **Dataset**                                                     | **Task**                                                                             | **PR's & Submissions**    | **Task + Measure**     | **Score getML**             | **Score RDL** | **Score Human** |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- | ---------------------- | --------------------------- | ------------- | --------------- |
@@ -165,9 +165,14 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 |                                                                 | [item-churn](https://relbench.stanford.edu/datasets/rel-amazon/#item-churn)          | [PR #12](https://github.com/getml/getml-relbench/pull/12) | classification (AUROC) | –                           | **0.828**     | 0.818           |
 |                                                                 | [user-ltv](https://relbench.stanford.edu/datasets/rel-amazon/#user-ltv)              |     | regression (MAE)       | –                           | 14.313        | **13.928**      |
 |                                                                 | [item-ltv](https://relbench.stanford.edu/datasets/rel-amazon/#item-ltv)              |     | regression (MAE)       | –                           | 50.053        | **41.122**      |
+| [rel-f1](https://relbench.stanford.edu/datasets/rel-f1)         | [driver-dnf](https://relbench.stanford.edu/datasets/rel-f1/#driver-dnf)              |     | classification (AUROC) | –                           | **0.726**     | 0.698           |
+|                                                                 | [driver-top3](https://relbench.stanford.edu/datasets/rel-f1/#driver-top3)            |     | classification (AUROC) | –                           | 0.755     | **0.824**           |
+|                                                                 | [driver-position](https://relbench.stanford.edu/datasets/rel-f1/#driver-position)    |     | regression (MAE)       | –                           | 4.022         | **3.963**       |
 | [rel-hm](https://relbench.stanford.edu/datasets/rel-hm)         | [user-churn](https://relbench.stanford.edu/datasets/rel-hm/#user-churn)              |  [hm-churn.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb) | classification (AUROC) | [**0.707**](hm-churn.ipynb) | 0.699         | 0.690           |
 |                                                                 | [item-sales](https://relbench.stanford.edu/datasets/rel-hm/#item-sales)              |  [hm-item.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-item.ipynb) | regression (MAE)       | [**0.031**](hm-item.ipynb)  | 0.056         | 0.036           |
-
+| [rel-trial](https://relbench.stanford.edu/datasets/rel-trial)   | [study-outcome](https://relbench.stanford.edu/datasets/rel-trial/#study-outcome)     |     | classification (AUROC) | –                           | 0.686     | **0.720**           |
+|                                                                 | [study-adverse](https://relbench.stanford.edu/datasets/rel-trial/#study-adverse)     |     | regression (MAE)       | –                           | 44.473        | **40.581**      |
+|                                                                 | [site-success](https://relbench.stanford.edu/datasets/rel-trial/#site-success)       |     | regression (MAE)       | –                           | **0.400**     | 0.407           |
 
 
 ## Let's Get Started!
