@@ -2,6 +2,12 @@
 
 Welcome to our [getML](https://getml.com/) Data Science Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
 
+:dart: [Want to know how to participate?](#this-is-how-you-participate)
+<br>
+:clipboard: [What challenges are available?](#pick-a-challenge)
+<br>
+:rocket: [Want to get started with getML right away?](#get-started-with-getml-fastprop)
+
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
 * **Build better models faster:**  
