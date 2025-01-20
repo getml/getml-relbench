@@ -156,6 +156,9 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 
 ## Pick a Challenge
 
+> [!NOTE]
+> New challenges will be added on the **20th of January at 16:00 CET.**
+
 | **Dataset**                                                     | **Task**                                                                             | **PR's & Submissions**    | **Task + Measure**     | **Score getML**             | **Score RDL** | **Score Human** |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- | ---------------------- | --------------------------- | ------------- | --------------- |
 | [rel-amazon](https://relbench.stanford.edu/datasets/rel-amazon) | [user-churn](https://relbench.stanford.edu/datasets/rel-amazon/#user-churn)          |     | classification (AUROC) | –                           | **0.704**     | 0.676           |
