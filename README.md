@@ -206,6 +206,7 @@ We recommend leveraging virtual machines from major cloud providers to handle su
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
 - [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
 
+For most datasets we recommend that you do the final run on a machine with **128GB memory** and **32 CPU cores**.
 
 ## Terms of Service & Licensing
 
