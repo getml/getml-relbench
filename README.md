@@ -211,7 +211,7 @@ We recommend leveraging virtual machines from major cloud providers to handle su
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
 - [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
 
-For most datasets we recommend that you do the final run on a machine with **128GB memory** and **32 CPU cores**.
+For most datasets, we highly recommend developing on a machine with **64 to 128GB of memory** and **more than 16 CPU cores** to keep getML pipeline runtimes around 30 to 60 minutes. While smaller setups are possible, they will likely require getML's memory mapping to be turned on, resulting in increased runtimes overall.
 
 ## Terms of Service & Licensing
 
