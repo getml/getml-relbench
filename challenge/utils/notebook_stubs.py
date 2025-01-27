@@ -1,8 +1,10 @@
+import base64
 import os
 from pathlib import Path
 from typing import Annotated
 from unittest.mock import patch
 
+import cairosvg
 import getml
 import jinja2
 import jupytext
@@ -13,6 +15,7 @@ from db_transformer.db.schema_autodetect import SchemaAnalyzer
 from lalia.chat.messages import UserMessage
 from lalia.chat.session import Session
 from lalia.llm import OpenAIChat
+from lalia.llm.models import ChatModel
 from markdownify import markdownify as md
 from nbconvert.preprocessors import ExecutePreprocessor
 from pydantic.alias_generators import to_snake
@@ -40,7 +43,7 @@ PAPER_DATASETS = [
     "DCG",
     "Same_gen",
     "voc",
-    "PubMed",
+    "PubMed_Diabetes",
     "Accidents",
     "imdb_ijs",
     "tpcd",
@@ -60,16 +63,21 @@ def retrieve_dataset_description(
 
 
 PROMPT = """
-Write a small dataset description for me. The description should include:
+Write a small dataset description, follow the structure below:
 - the data model (relational schaema)
+- the task (classification, regression) and target column
 - the types of the columns
 - some metadata about the dataset (size, number of tables, number of rows, etc.)
+
+AVOID BOLD TEXT AND PREFER ITALICS FOR EMPHASIS.
 
 THE TEXT WILL BE EMBEDDED IN A NOTEBOOK STUB FOR THE DATASET. SO PLEASE DO NOT GENERATE ANY
 TOP-LEVEL MARKUP (HEADLINES, ETC.). JUST THE TEXT CONTENT. THANK YOU!
 """
 
-llm = OpenAIChat(api_key=os.environ["OPENAI_API_KEY"])
+llm = OpenAIChat(
+    api_key=os.environ["OPENAI_API_KEY"], model=ChatModel.GPT_4O, temperature=0
+)
 session = Session(
     llm=llm,
     system_message=PROMPT,
@@ -92,36 +100,51 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
 
     with patch(
         "db_transformer.helpers.progress.is_notebook",
-        getml.utilities.progress._is_jupyter_without_ipywidgets,
+        lambda: getml.utilities.progress._is_jupyter()
+        and not getml.utilities.progress._is_emacs_kernel(),
     ):
         schema = analyzer.guess_schema()
 
-    population_table_name = CTU_REPOSITORY_DEFAULTS[dataset].target_table
-    peripheral_table_names = [
-        tale_name for tale_name in schema if tale_name != population_table_name
+    population_name = to_snake(CTU_REPOSITORY_DEFAULTS[dataset].target_table)
+    peripheral_names = [
+        to_snake(tale_name)
+        for tale_name in schema
+        if tale_name != CTU_REPOSITORY_DEFAULTS[dataset].target_table
     ]
 
     dataset_er_diagram_url = (
         f"https://relational.fel.cvut.cz/assets/img/datasets-generated/{dataset}.svg"
     )
+    svg_data = requests.get(dataset_er_diagram_url).content
+    png_data = cairosvg.svg2png(bytestring=svg_data)
+
+    base64_image = base64.b64encode(png_data).decode("utf-8")
+
     message = UserMessage(
         content=[
             {
                 "type": "text",
-                "text": "Please provide a dataset description of the dataset in the image.",
+                "text": f"Use the datamodel below to create a dataset description for the '{dataset}' dataset, "
+                "first retrieve additonal information through the `retrieve_dataset_description` function.",
             },
-            {"type": "image", "url": dataset_er_diagram_url},
+            {
+                "type": "image_url",
+                "image_url": {"url": f"data:image/png;base64,{base64_image}"},
+            },
         ]
     )
+    session.messages.add(message)
 
-    dataset_description = session(dataset).content
+    dataset_description = session("").content
 
     py_percent_rendered = template.render(
+        project_name=f"db_transformer_{to_snake(dataset)}",
         dataset=dataset,
         dataset_description=dataset_description,
         dataset_er_diagram_url=dataset_er_diagram_url,
-        population_table_name=population_table_name,
-        peripheral_table_names=peripheral_table_names,
+        target_column=CTU_REPOSITORY_DEFAULTS[dataset].target_column,
+        population_name=population_name,
+        peripheral_names=peripheral_names,
     )
 
     notebook = jupytext.reads(py_percent_rendered, fmt="py:percent")
@@ -131,10 +154,15 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     exec_proc.preprocess(notebook)
 
     jupytext.write(notebook, output_path / f"{to_snake(dataset)}.ipynb")
+    return session
 
 
 def create_notebook_stubs():
+    output_path = OUTPUT_PATH
     for dataset in PAPER_DATASETS:
-        print(f"Creating notebook stub for {dataset}... ", end="")
-        create_notebook_stub(dataset)
-        print("Done.")
+        print(f"Creating notebook stub for {dataset}... ")
+        if Path(output_path / f"{to_snake(dataset)}.ipynb").exists():
+            print("Already exists. ")
+        else:
+            create_notebook_stub(dataset, output_path)
+            print("Done.")

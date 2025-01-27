@@ -12,6 +12,7 @@ import pandas as pd
 import torch
 import torch_geometric.transforms as T
 from db_transformer import data  # type: ignore # noqa: E402
+from pydantic.alias_generators import to_snake
 
 RANDOM_SEED = 42
 
@@ -33,15 +34,16 @@ def load_ctu_dataset(
 
     with patch(
         "db_transformer.helpers.progress.is_notebook",
-        getml.utilities.progress._is_jupyter_without_ipywidgets,
+        lambda: getml.utilities.progress._is_jupyter()
+        and not getml.utilities.progress._is_emacs_kernel(),
     ):
-        dataset = data.CTUDataset(
-            name,
-            data_dir=f"{tempfile.gettempdir()}/ctu_data",
-            force_remake=True,
-            save_db=False,  # serialization is broken
-        )
         with open(os.devnull, "w") as devnull:
+            dataset = data.CTUDataset(
+                name,
+                data_dir=f"{tempfile.gettempdir()}/ctu_data",
+                force_remake=True,
+                save_db=False,  # serialization is broken
+            )
             with redirect_stdout(devnull), warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 hetero_data, _ = dataset.build_hetero_data()
@@ -70,12 +72,38 @@ def load_ctu_dataset(
 
     split = pd.DataFrame({"split": subset, "index": index}).set_index("index")
 
-    dfs = {name: table.df for name, table in dataset.db.table_dict.items()}
+    dfs = {
+        name: table.df.drop("__filler", axis=1, errors="ignore")
+        for name, table in dataset.db.table_dict.items()
+    }
 
     population = dfs.pop(population_name).join(split)
     peripheral = dfs
 
-    return getml.data.DataFrame.from_pandas(population, name=population_name), {
-        name: getml.data.DataFrame.from_pandas(df, name=name)
+    if (
+        dataset.defaults.task is data.dataset_defaults.utils.TaskType.CLASSIFICATION
+        and population[dataset.defaults.target_column].nunique() > 2
+    ):
+        name = to_snake(population_name)
+        population_getml = getml.data.make_target_columns(
+            getml.data.DataFrame.from_pandas(
+                population,
+                name=to_snake(population_name),
+                roles=getml.data.Roles(unused_string=[dataset.defaults.target_column]),
+            ),
+            dataset.defaults.target_column,
+        ).to_df(name)
+        population_getml[dataset.defaults.target_column] = population[
+            dataset.defaults.target_column
+        ].values
+    else:
+        population_getml = getml.data.DataFrame.from_pandas(
+            population,
+            name=to_snake(population_name),
+            roles=getml.data.Roles(target=[dataset.defaults.target_column]),
+        )
+
+    return population_getml, {
+        to_snake(name): getml.data.DataFrame.from_pandas(df, name=to_snake(name))
         for name, df in peripheral.items()
     }
