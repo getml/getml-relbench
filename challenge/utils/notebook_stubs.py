@@ -120,22 +120,20 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
 
     diagram_png_base64 = base64.b64encode(diagram_png).decode("utf-8")
 
-    message = UserMessage(
+    diagram_message = UserMessage(
         content=[
-            {
-                "type": "text",
-                "text": f"Use the datamodel below to create a dataset description for the '{dataset}' dataset, "
-                "first retrieve additonal information through the `retrieve_dataset_description` function.",
-            },
             {
                 "type": "image_url",
                 "image_url": {"url": f"data:image/png;base64,{diagram_png_base64}"},
             },
         ]
     )
-    session.messages.add(message)
+    session.messages.add(diagram_message)
 
-    dataset_description = session("").content
+    dataset_description = session(
+        f"Use the datamodel above to create a dataset description for the '{dataset}' dataset, "
+        "first retrieve additonal information through the `retrieve_dataset_description` function."
+    ).content
 
     py_percent_rendered = template.render(
         project_name=f"db_transformer_{to_snake(dataset)}",
