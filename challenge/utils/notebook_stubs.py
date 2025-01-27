@@ -115,10 +115,10 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     dataset_er_diagram_url = (
         f"https://relational.fel.cvut.cz/assets/img/datasets-generated/{dataset}.svg"
     )
-    svg_data = requests.get(dataset_er_diagram_url).content
-    png_data = cairosvg.svg2png(bytestring=svg_data)
+    diagram_svg = requests.get(dataset_er_diagram_url).content
+    diagram_png = cairosvg.svg2png(bytestring=diagram_svg)
 
-    base64_image = base64.b64encode(png_data).decode("utf-8")
+    diagram_png_base64 = base64.b64encode(diagram_png).decode("utf-8")
 
     message = UserMessage(
         content=[
@@ -129,7 +129,7 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
             },
             {
                 "type": "image_url",
-                "image_url": {"url": f"data:image/png;base64,{base64_image}"},
+                "image_url": {"url": f"data:image/png;base64,{diagram_png_base64}"},
             },
         ]
     )
