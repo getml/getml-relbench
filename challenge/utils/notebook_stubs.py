@@ -105,9 +105,11 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     ):
         schema = analyzer.guess_schema()
 
-    population_name = to_snake(CTU_REPOSITORY_DEFAULTS[dataset].target_table)
+    population_name = to_snake(CTU_REPOSITORY_DEFAULTS[dataset].target_table).replace(
+        " ", "_"
+    )
     peripheral_names = [
-        to_snake(tale_name)
+        to_snake(tale_name).replace(" ", "_")
         for tale_name in schema
         if tale_name != CTU_REPOSITORY_DEFAULTS[dataset].target_table
     ]

@@ -84,11 +84,11 @@ def load_ctu_dataset(
         dataset.defaults.task is data.dataset_defaults.utils.TaskType.CLASSIFICATION
         and population[dataset.defaults.target_column].nunique() > 2
     ):
-        name = to_snake(population_name)
+        name = to_snake(population_name).replace(" ", "_")
         population_getml = getml.data.make_target_columns(
             getml.data.DataFrame.from_pandas(
                 population,
-                name=to_snake(population_name),
+                name=to_snake(population_name).replace(" ", "_"),
                 roles=getml.data.Roles(unused_string=[dataset.defaults.target_column]),
             ),
             dataset.defaults.target_column,
@@ -99,7 +99,7 @@ def load_ctu_dataset(
     else:
         population_getml = getml.data.DataFrame.from_pandas(
             population,
-            name=to_snake(population_name),
+            name=to_snake(population_name).replace(" ", "_"),
             roles=getml.data.Roles(target=[dataset.defaults.target_column]),
         )
 
