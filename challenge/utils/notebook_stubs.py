@@ -46,7 +46,23 @@ PAPER_DATASETS = [
     "PubMed_Diabetes",
     "Accidents",
     "imdb_ijs",
-    "tpcd",
+    # "tpcd", # ctu database times out
+    "Biodegradability",
+    "classicmodels",
+    "GOSales",
+    "northwind",
+    "Triazine",
+    "Basketball_men",
+    "restbase",
+    # "AdventureWorks2014", # conversion to torch.frame fails upstream
+    "FNHK",
+    "sakila",
+    "stats",
+    "Grants",
+    "ConsumerExpenditures",
+    "employee",
+    "SalesDB",
+    "Seznam",
 ]
 
 
