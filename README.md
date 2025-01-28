@@ -24,8 +24,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 > [!NOTE]
 > This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
 > 
-> We will periodically add new challenges until we run out of tasks. New challenges will be added on the **27th of January at 16:00 CET.**
-
+> We will periodically add new challenges until we run out of tasks. There are more to come.
 ## Our Motivation
 
 At getML, we've seen firsthand how FastProp simplifies and accelerates feature engineering for relational and time-series data. By launching this challenge, we aim to share these benefits with the broader data science and engineering community.  
