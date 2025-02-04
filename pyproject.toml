@@ -133,17 +133,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "lalia",
     "markdownify>=0.14.1",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.uv.sources]
-getml = { path = "../monorepo/src/python-api" }
-lalia = { path = "../chat/lalia" }
 
 [tool.hatch.build.targets.wheel]
 packages = ["challenge"]
