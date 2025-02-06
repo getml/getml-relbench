@@ -11,8 +11,8 @@ from sklearn.metrics import mean_absolute_error
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(message)s")
 
-FEATURES_PARQUET_PATH_TEMPLATE = "hm_item_pipe_refined_{subset}_features.parquet"
-FEATURES_LGBM_BIN_PATH_TEMPLATE = "hm_item_pipe_refined_{subset}_features.bin"
+FEATURES_PARQUET_PATH_TEMPLATE = "az_item_pipe_refined_{subset}_features.parquet"
+FEATURES_LGBM_BIN_PATH_TEMPLATE = "az_item_pipe_refined_{subset}_features.bin"
 FEATURES_DROP_COLS = ["sales", "article_id", "timestamp"]
 
 LGBM_NUM_BOOST_ROUND = 2000
@@ -65,13 +65,13 @@ def select_columns(table):
 
 
 X_train, categorical_cols = encode_categoricals(select_columns(train_arrow))
-y_train = train_arrow["sales"]
+y_train = train_arrow["churn"]
 
 X_val, _ = encode_categoricals(select_columns(val_arrow))
-y_val = val_arrow["sales"]
+y_val = val_arrow["churn"]
 
 X_test, _ = encode_categoricals(select_columns(test_arrow))
-y_test = test_arrow["sales"]
+y_test = test_arrow["churn"]
 
 
 ###############################################################################
