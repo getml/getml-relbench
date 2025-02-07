@@ -1,5 +1,6 @@
 import base64
 import os
+from functools import lru_cache
 from pathlib import Path
 from typing import Annotated
 from unittest.mock import patch
@@ -10,7 +11,9 @@ import jinja2
 import jupytext
 import requests
 from db_transformer.data import CTUDataset
-from db_transformer.data.dataset_defaults import CTU_REPOSITORY_DEFAULTS
+from db_transformer.data.dataset_defaults import (
+    CTU_REPOSITORY_DEFAULTS,
+)
 from db_transformer.db.schema_autodetect import SchemaAnalyzer
 from lalia.chat.messages import UserMessage
 from lalia.chat.session import Session
@@ -20,6 +23,11 @@ from markdownify import markdownify as md
 from nbconvert.preprocessors import ExecutePreprocessor
 from pydantic.alias_generators import to_snake
 
+from challenge.utils.data import (
+    infer_task_type,
+    load_ctu_dataset,
+)
+
 UTILS_ROOT = Path(__file__).parent
 OUTPUT_PATH = UTILS_ROOT / "../tasks"
 
@@ -28,30 +36,16 @@ OUTPUT_PATH = UTILS_ROOT / "../tasks"
 Datasets used in the "Transformers Meet Relational Databases" paper.
 """
 PAPER_DATASETS = [
-    "Carcinogenesis",
-    "CraftBeer",
     "Dallas",
     "financial",
-    "Mondial",
-    "MuskSmall",
     "mutagenesis",
     "Pima",
-    "PremierLeague",
-    "Toxicology",
-    "UW_std",
     "WebKP",
-    "DCG",
     "Same_gen",
-    "voc",
     "PubMed_Diabetes",
     "Accidents",
     "imdb_ijs",
     # "tpcd", # ctu database times out
-    "Biodegradability",
-    "classicmodels",
-    "GOSales",
-    "northwind",
-    "Triazine",
     "Basketball_men",
     "restbase",
     # "AdventureWorks2014", # conversion to torch.frame fails upstream
@@ -72,7 +66,8 @@ def retrieve_dataset_description(
     """
     Retrieve the description of a dataset from the CTU dataset repository.
     """
-    url = f"https://relational.fel.cvut.cz/dataset/{dataset}"
+    dataset_url = dataset.replace("_", "").replace("-", "")
+    url = f"https://relational.fel.cvut.cz/dataset/{dataset_url}"
     response = requests.get(url)
     response.raise_for_status()
     return md(response.text)
@@ -84,6 +79,10 @@ Write a small dataset description, follow the structure below:
 - the task (classification, regression) and target column
 - the types of the columns
 - some metadata about the dataset (size, number of tables, number of rows, etc.)
+
+As all datasets are well known public datasets extensively used in research, augmentthe description with
+additional information known about those datasets, i.e. which research papers used them, what kind of tasks
+they are used for in general, etc.
 
 AVOID BOLD TEXT AND PREFER ITALICS FOR EMPHASIS.
 
@@ -105,30 +104,9 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     with open(UTILS_ROOT / "assets/notebook_template.jinja2") as f:
         template = jinja2.Template(f.read())
 
-    conn = CTUDataset.create_remote_connection(dataset)
-    analyzer = SchemaAnalyzer(
-        conn,
-        verbose=True,
-        target=CTU_REPOSITORY_DEFAULTS[dataset].target,
-        target_type=CTU_REPOSITORY_DEFAULTS[dataset].task.to_type(),
-        post_guess_schema_hook=CTU_REPOSITORY_DEFAULTS[dataset].schema_fixer,
-    )
+    dataset_defaults = CTU_REPOSITORY_DEFAULTS[dataset]
 
-    with patch(
-        "db_transformer.helpers.progress.is_notebook",
-        lambda: getml.utilities.progress._is_jupyter()
-        and not getml.utilities.progress._is_emacs_kernel(),
-    ):
-        schema = analyzer.guess_schema()
-
-    population_name = to_snake(CTU_REPOSITORY_DEFAULTS[dataset].target_table).replace(
-        " ", "_"
-    )
-    peripheral_names = [
-        to_snake(tale_name).replace(" ", "_")
-        for tale_name in schema
-        if tale_name != CTU_REPOSITORY_DEFAULTS[dataset].target_table
-    ]
+    population_name = to_snake(dataset_defaults.target_table).replace(" ", "_")
 
     dataset_er_diagram_url = (
         f"https://relational.fel.cvut.cz/assets/img/datasets-generated/{dataset}.svg"
@@ -148,19 +126,25 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     )
     session.messages.add(diagram_message)
 
+    population, peripheral = load_ctu_dataset(dataset, as_pandas=True)
+    task_type = infer_task_type(dataset_defaults, population)
+
     dataset_description = session(
         f"Use the datamodel above to create a dataset description for the '{dataset}' dataset, "
-        "first retrieve additonal information through the `retrieve_dataset_description` function."
+        "first retrieve additonal information through the `retrieve_dataset_description` function. "
+        "Particularly, describe the target column and the task (classification, regression) of the dataset. "
+        f"The task type for this dataset is: {task_type!r}."
     ).content
 
     py_percent_rendered = template.render(
-        project_name=f"db_transformer_{to_snake(dataset)}",
+        project_name=f"{to_snake(dataset)}",
         dataset=dataset,
         dataset_description=dataset_description,
         dataset_er_diagram_url=dataset_er_diagram_url,
-        target_column=CTU_REPOSITORY_DEFAULTS[dataset].target_column,
+        target_column=dataset_defaults.target_column,
+        task_type=task_type,
         population_name=population_name,
-        peripheral_names=peripheral_names,
+        peripheral_names=list(peripheral),
     )
 
     notebook = jupytext.reads(py_percent_rendered, fmt="py:percent")
@@ -170,7 +154,6 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     exec_proc.preprocess(notebook)
 
     jupytext.write(notebook, output_path / f"{to_snake(dataset)}.ipynb")
-    return session
 
 
 def create_notebook_stubs():
