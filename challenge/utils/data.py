@@ -21,6 +21,19 @@ torch.manual_seed(RANDOM_SEED)
 random.seed(RANDOM_SEED)
 
 
+RELDB_IP = "35.195.45.191"
+
+
+class RelDBDataset(data.CTUDataset):
+    @classmethod
+    def get_url(cls, dataset: data.CTUDatasetName) -> str:
+        connector = "mysql+mysqlconnector"
+        port = 3306
+        if dataset == "tpcd":
+            return f"{connector}://guest:relational@{RELDB_IP}:{port}/{dataset}"
+        return super().get_url(dataset)
+
+
 def load_ctu_dataset(
     name: str, share_val: float = 0.3, share_test: float = 0.0
 ) -> Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]]:
@@ -38,7 +51,7 @@ def load_ctu_dataset(
         and not getml.utilities.progress._is_emacs_kernel(),
     ):
         with open(os.devnull, "w") as devnull:
-            dataset = data.CTUDataset(
+            dataset = RelDBDataset(
                 name,
                 data_dir=f"{tempfile.gettempdir()}/ctu_data",
                 force_remake=True,
