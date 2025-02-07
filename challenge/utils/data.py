@@ -105,6 +105,7 @@ def load_data_from_reldb_dataset(
         target_role = getml.data.roles.unused_string
     else:
         target_role = getml.data.roles.target
+
     population_getml = getml.data.DataFrame.from_pandas(
         population,
         name=to_snake(population_name).replace(" ", "_"),
@@ -112,8 +113,11 @@ def load_data_from_reldb_dataset(
     )
 
     return population_getml, {
-        to_snake(name): getml.data.DataFrame.from_pandas(df, name=to_snake(name))
-        for name, df in peripheral.items()
+        to_snake(name): getml.data.DataFrame.from_pandas(
+            peripheral[name],
+            name=name,
+        )
+        for name in sorted(peripheral)
     }
 
 

@@ -45,7 +45,7 @@ PAPER_DATASETS = [
     "PubMed_Diabetes",
     "Accidents",
     "imdb_ijs",
-    # "tpcd", # ctu database times out
+    "tpcd",
     "Basketball_men",
     "restbase",
     # "AdventureWorks2014", # conversion to torch.frame fails upstream
@@ -106,8 +106,6 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
 
     dataset_defaults = CTU_REPOSITORY_DEFAULTS[dataset]
 
-    population_name = to_snake(dataset_defaults.target_table).replace(" ", "_")
-
     dataset_er_diagram_url = (
         f"https://relational.fel.cvut.cz/assets/img/datasets-generated/{dataset}.svg"
     )
@@ -127,6 +125,9 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
     session.messages.add(diagram_message)
 
     population, peripheral = load_ctu_dataset(dataset, as_pandas=True)
+    population_name = to_snake(dataset_defaults.target_table).replace(" ", "_")
+    peripheral_names = ([to_snake(name).lower() for name in sorted(peripheral)],)
+
     task_type = infer_task_type(dataset_defaults, population)
 
     dataset_description = session(
@@ -144,7 +145,7 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
         target_column=dataset_defaults.target_column,
         task_type=task_type,
         population_name=population_name,
-        peripheral_names=list(peripheral),
+        peripheral_names=peripheral_names,
     )
 
     notebook = jupytext.reads(py_percent_rendered, fmt="py:percent")
