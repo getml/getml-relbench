@@ -14,6 +14,10 @@ import pandas as pd
 import torch
 import torch_geometric.transforms as T
 from db_transformer import data  # type: ignore # noqa: E402
+from experiments.getml_xgboost import (  # type: ignore # noqa: E402
+    bfs,
+    build_getml_datamodel,
+)
 from pydantic.alias_generators import to_snake
 
 RANDOM_SEED = 42
@@ -108,7 +112,7 @@ def load_data_from_reldb_dataset(
 
     population_getml = getml.data.DataFrame.from_pandas(
         population,
-        name=to_snake(population_name).replace(" ", "_"),
+        name=population_name,
         roles={target_role: [dataset.defaults.target_column]},
     )
 
@@ -184,3 +188,16 @@ def infer_task_type(
             return TaskType.MULTICLASS_CLASSIFICATION
         return TaskType.CLASSIFICATION
     return TaskType.REGRESSION
+
+
+def retrieve_generated_data_model(
+    dataset_name: str, max_depth: int
+) -> getml.data.DataModel:
+    dataset = build_reldb_dataset(dataset_name)
+    schema = dataset.schema
+    nodes, edges = bfs(schema, dataset.defaults.target_table, max_depth)
+
+    population, peripheral = load_data_from_reldb_dataset(dataset)
+    dfs = {"__target_table": population, population.name: population, **peripheral}
+
+    return build_getml_datamodel(dfs, nodes, edges)
