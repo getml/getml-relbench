@@ -17,6 +17,7 @@ from db_transformer import data  # type: ignore # noqa: E402
 from experiments.getml_xgboost import (  # type: ignore # noqa: E402
     bfs,
     build_getml_datamodel,
+    label_getml_roles,
 )
 from pydantic.alias_generators import to_snake
 
@@ -190,14 +191,21 @@ def infer_task_type(
     return TaskType.REGRESSION
 
 
-def retrieve_generated_data_model(
-    dataset_name: str, max_depth: int
-) -> getml.data.DataModel:
+def retrieve_auto_annotated_data(dataset: RelDBDataset) -> dict[str, getml.data.Roles]:
+    schema = dataset.schema
+    data_df = label_getml_roles(
+        {n: t.df for n, t in dataset.db.table_dict.items()}, schema, dataset.defaults
+    )
+    return data_df
+
+
+def retrieve_auto_datamodel(dataset_name: str, max_depth: int) -> getml.data.DataModel:
     dataset = build_reldb_dataset(dataset_name)
     schema = dataset.schema
+    population, peripheral = load_data_from_reldb_dataset(dataset)
+
+    data_df = {"__target_table": population, population.name: population, **peripheral}
+
     nodes, edges = bfs(schema, dataset.defaults.target_table, max_depth)
 
-    population, peripheral = load_data_from_reldb_dataset(dataset)
-    dfs = {"__target_table": population, population.name: population, **peripheral}
-
-    return build_getml_datamodel(dfs, nodes, edges)
+    return build_getml_datamodel(data_df, nodes, edges)
