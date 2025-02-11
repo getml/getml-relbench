@@ -8,7 +8,6 @@ from sklearn.metrics import roc_auc_score
 
 # optuna_hm-churn.py >> opt-hm-churn.log 2>&1 &
 
-pref = "_200"
 
 
 ##############################################################################
@@ -16,7 +15,7 @@ pref = "_200"
 # #############################################################################
 
 logging.basicConfig(
-    filename=f"opt-az-item-churn{pref}.log",    # File where all logs will be written
+    filename=f"opt-az-item-churn.log",    # File where all logs will be written
     level=logging.INFO,             # You can switch to DEBUG for more detail
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
@@ -27,9 +26,9 @@ logger = logging.getLogger(__name__)
 # 2. Load and preprocess data
 # ##############################################################################
 
-train_df = pd.read_parquet(f"train_transform{pref}")
-val_df = pd.read_parquet(f"val_transform{pref}")
-test_df = pd.read_parquet(f"test_transform{pref}")
+train_df = pd.read_parquet(f"train_transform")
+val_df = pd.read_parquet(f"val_transform")
+test_df = pd.read_parquet(f"test_transform")
 
 X_train = train_df.drop(columns=["churn"])
 y_train = train_df["churn"]
@@ -112,8 +111,8 @@ def objective(trial):
 ###############################################################################
 # 4. Create or load Optuna study using SQLite
 # ##############################################################################
-storage_url = f"sqlite:///opt-az-item-churn{pref}.db"
-study_name  = f"opt-az-item-churn{pref}"
+storage_url = f"sqlite:///opt-az-item-churn.db"
+study_name  = f"opt-az-item-churn"
 
 study = optuna.create_study(
     study_name=study_name,
