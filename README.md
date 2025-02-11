@@ -2,6 +2,12 @@
 
 Welcome to our [getML](https://getml.com/) Data Science Challenge! This challenge invites you to tackle a series of relational learning benchmark problems using [getML FastProp](https://getml.com/latest/user_guide/concepts/feature_engineering/#feature-engineering-algorithms-fastprop) — the [fastest open-source tool](https://github.com/getml/getml-community?tab=readme-ov-file#benchmarks) for automated feature engineering on relational and time-series data.
 
+:dart: [How to participate](#this-is-how-you-participate)
+<br>
+:clipboard: [Available Challenges](#pick-a-challenge)
+<br>
+:rocket: [Get Started with getML FastProp](#get-started-with-getml-fastprop)
+
 Ready to elevate your data science skills and make a real impact? Here's what awaits you:
 
 * **Build better models faster:**  
@@ -18,8 +24,7 @@ Connect with the getML dev team and other data scientists on our [Discord](https
 > [!NOTE]
 > This challenge will be open for submissions starting on the **17th of January 2025 at 16:00 CET!**
 > 
-> We will periodically add new challenges until we run out of tasks. New challenges will be added on the **20th of January at 16:00 CET.**
-
+> We will periodically add new challenges until we run out of tasks. There are more to come.
 ## Our Motivation
 
 At getML, we've seen firsthand how FastProp simplifies and accelerates feature engineering for relational and time-series data. By launching this challenge, we aim to share these benefits with the broader data science and engineering community.  
@@ -150,15 +155,24 @@ Furhter information can be found in the **[User Guide](https://getml.com/latest/
 
 ## Pick a Challenge
 
+> [!NOTE]
+> New challenges will be added on the **27th of January at 16:00 CET.**
+
 | **Dataset**                                                     | **Task**                                                                             | **PR's & Submissions**    | **Task + Measure**     | **Score getML**             | **Score RDL** | **Score Human** |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- | ---------------------- | --------------------------- | ------------- | --------------- |
-| [rel-amazon](https://relbench.stanford.edu/datasets/rel-amazon) | [user-churn](https://relbench.stanford.edu/datasets/rel-amazon/#user-churn)          |     | classification (AUROC) | –                           | **0.704**     | 0.676           |
+
+| [rel-amazon](https://relbench.stanford.edu/datasets/rel-amazon) | [user-churn](https://relbench.stanford.edu/datasets/rel-amazon/#user-churn)          | [PR #13](https://github.com/getml/getml-relbench/pull/13) | classification (AUROC) | –                           | **0.704**     | 0.676           |
 |                                                                 | [item-churn](https://relbench.stanford.edu/datasets/rel-amazon/#item-churn)          | [PR #12](https://github.com/getml/getml-relbench/pull/12) | classification (AUROC) | –                           | **0.828**     | 0.818           |
 |                                                                 | [user-ltv](https://relbench.stanford.edu/datasets/rel-amazon/#user-ltv)              |     | regression (MAE)       | –                           | 14.313        | **13.928**      |
 |                                                                 | [item-ltv](https://relbench.stanford.edu/datasets/rel-amazon/#item-ltv)              |     | regression (MAE)       | –                           | 50.053        | **41.122**      |
+| [rel-f1](https://relbench.stanford.edu/datasets/rel-f1)         | [driver-dnf](https://relbench.stanford.edu/datasets/rel-f1/#driver-dnf)              |     | classification (AUROC) | –                           | **0.726**     | 0.698           |
+|                                                                 | [driver-top3](https://relbench.stanford.edu/datasets/rel-f1/#driver-top3)            |     | classification (AUROC) | –                           | 0.755     | **0.824**           |
+|                                                                 | [driver-position](https://relbench.stanford.edu/datasets/rel-f1/#driver-position)    |     | regression (MAE)       | –                           | 4.022         | **3.963**       |
 | [rel-hm](https://relbench.stanford.edu/datasets/rel-hm)         | [user-churn](https://relbench.stanford.edu/datasets/rel-hm/#user-churn)              |  [hm-churn.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb) | classification (AUROC) | [**0.707**](hm-churn.ipynb) | 0.699         | 0.690           |
 |                                                                 | [item-sales](https://relbench.stanford.edu/datasets/rel-hm/#item-sales)              |  [hm-item.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-item.ipynb) | regression (MAE)       | [**0.031**](hm-item.ipynb)  | 0.056         | 0.036           |
-
+| [rel-trial](https://relbench.stanford.edu/datasets/rel-trial)   | [study-outcome](https://relbench.stanford.edu/datasets/rel-trial/#study-outcome)     |     | classification (AUROC) | –                           | 0.686     | **0.720**           |
+|                                                                 | [study-adverse](https://relbench.stanford.edu/datasets/rel-trial/#study-adverse)     |     | regression (MAE)       | –                           | 44.473        | **40.581**      |
+|                                                                 | [site-success](https://relbench.stanford.edu/datasets/rel-trial/#site-success)       |     | regression (MAE)       | –                           | **0.400**     | 0.407           |
 
 
 ## Let's Get Started!
@@ -197,6 +211,7 @@ We recommend leveraging virtual machines from major cloud providers to handle su
 - [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
 - [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
 
+For most datasets, we highly recommend developing on a machine with **64 to 128GB of memory** and **more than 16 CPU cores** to keep getML pipeline runtimes around 30 to 60 minutes. While smaller setups are possible, they will likely require getML's memory mapping to be turned on, resulting in increased runtimes overall.
 
 ## Terms of Service & Licensing
 
