@@ -2,7 +2,7 @@
 name = "getml-relbench"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.12"
+requires-python = "==3.12"
 dependencies = [
     "absl-py==2.1.0",
     "accelerate==1.2.1",
@@ -129,6 +129,8 @@ dependencies = [
     "widgetsnbextension==4.0.13",
     "yarl==1.18.3",
     "zipp==3.21.0",
+    "lightgbm>=4.5.0",
+    "optuna>=4.1.0",    
 ]
 
 [dependency-groups]
@@ -142,4 +144,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["challenge"]
-
