@@ -3,7 +3,9 @@ import random
 import tempfile
 import warnings
 from contextlib import redirect_stdout
-from typing import Dict, Tuple
+from enum import StrEnum
+from functools import lru_cache
+from typing import Dict, Literal, Tuple, Union, overload
 from unittest.mock import patch
 
 import getml
@@ -12,6 +14,11 @@ import pandas as pd
 import torch
 import torch_geometric.transforms as T
 from db_transformer import data  # type: ignore # noqa: E402
+from experiments.getml_xgboost import (  # type: ignore # noqa: E402
+    bfs,
+    build_getml_datamodel,
+    label_getml_roles,
+)
 from pydantic.alias_generators import to_snake
 
 RANDOM_SEED = 42
@@ -21,29 +28,40 @@ torch.manual_seed(RANDOM_SEED)
 random.seed(RANDOM_SEED)
 
 
-def load_ctu_dataset(
-    name: str, share_val: float = 0.3, share_test: float = 0.0
-) -> Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]]:
-    """
-    Load a CTU dataset as a getML data frame and split it into train, validation, and test sets.
+RELDB_IP = "35.195.45.191"
 
-    The split reproduces the original split from the "Transformers meets Relational Databases" paper.
-    """
-    if not share_val:
-        raise ValueError("share_val must be greater than 0")
 
+class RelDBDataset(data.CTUDataset):
+    @classmethod
+    def get_url(cls, dataset: data.CTUDatasetName) -> str:
+        connector = "mysql+mysqlconnector"
+        port = 3306
+        if dataset == "tpcd":
+            return f"{connector}://guest:relational@{RELDB_IP}:{port}/{dataset}"
+        return super().get_url(dataset)
+
+
+class TaskType(StrEnum):
+    CLASSIFICATION = "classification"
+    REGRESSION = "regression"
+    MULTICLASS_CLASSIFICATION = "multiclass_classification"
+
+
+def load_data_from_reldb_dataset(
+    dataset: RelDBDataset,
+    share_val: float = 0.3,
+    share_test: float = 0.0,
+    as_pandas: bool = False,
+) -> Union[
+    Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]],
+    Tuple[pd.DataFrame, Dict[str, pd.DataFrame]],
+]:
     with patch(
         "db_transformer.helpers.progress.is_notebook",
         lambda: getml.utilities.progress._is_jupyter()
         and not getml.utilities.progress._is_emacs_kernel(),
     ):
         with open(os.devnull, "w") as devnull:
-            dataset = data.CTUDataset(
-                name,
-                data_dir=f"{tempfile.gettempdir()}/ctu_data",
-                force_remake=True,
-                save_db=False,  # serialization is broken
-            )
             with redirect_stdout(devnull), warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 hetero_data, _ = dataset.build_hetero_data()
@@ -52,7 +70,9 @@ def load_ctu_dataset(
 
     n_total = hetero_data[population_name].y.shape[0]
     splitted = T.RandomNodeSplit(
-        "train_rest", num_val=int(share_val * n_total), num_test=(share_test * n_total)
+        "train_rest",
+        num_val=int(share_val * n_total),
+        num_test=(share_test * n_total),
     )(hetero_data)
     population_hetero_data = splitted[population_name]
 
@@ -80,30 +100,112 @@ def load_ctu_dataset(
     population = dfs.pop(population_name).join(split)
     peripheral = dfs
 
+    if as_pandas:
+        return population, peripheral
+
     if (
         dataset.defaults.task is data.dataset_defaults.utils.TaskType.CLASSIFICATION
         and population[dataset.defaults.target_column].nunique() > 2
     ):
-        name = to_snake(population_name).replace(" ", "_")
-        population_getml = getml.data.make_target_columns(
-            getml.data.DataFrame.from_pandas(
-                population,
-                name=to_snake(population_name).replace(" ", "_"),
-                roles=getml.data.Roles(unused_string=[dataset.defaults.target_column]),
-            ),
-            dataset.defaults.target_column,
-        ).to_df(name)
-        population_getml[dataset.defaults.target_column] = population[
-            dataset.defaults.target_column
-        ].values
+        target_role = getml.data.roles.unused_string
     else:
-        population_getml = getml.data.DataFrame.from_pandas(
-            population,
-            name=to_snake(population_name).replace(" ", "_"),
-            roles=getml.data.Roles(target=[dataset.defaults.target_column]),
-        )
+        target_role = getml.data.roles.target
+
+    population_getml = getml.data.DataFrame.from_pandas(
+        population,
+        name=population_name,
+        roles={target_role: [dataset.defaults.target_column]},
+    )
 
     return population_getml, {
-        to_snake(name): getml.data.DataFrame.from_pandas(df, name=to_snake(name))
-        for name, df in peripheral.items()
+        to_snake(name): getml.data.DataFrame.from_pandas(
+            peripheral[name],
+            name=name,
+        )
+        for name in sorted(peripheral)
     }
+
+
+def build_reldb_dataset(
+    name: str, share_val: float = 0.3, share_test: float = 0.0, as_pandas: bool = False
+) -> RelDBDataset:
+    if not share_val:
+        raise ValueError("share_val must be greater than 0")
+
+    with patch(
+        "db_transformer.helpers.progress.is_notebook",
+        lambda: getml.utilities.progress._is_jupyter()
+        and not getml.utilities.progress._is_emacs_kernel(),
+    ):
+        return RelDBDataset(
+            name,
+            data_dir=f"{tempfile.gettempdir()}/ctu_data",
+            save_db=False,  # serialization is broken
+        )
+
+
+@overload
+def load_ctu_dataset(
+    name: str,
+    share_val: float = 0.3,
+    share_test: float = 0.0,
+    as_pandas: Literal[False] = False,
+) -> Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]]: ...
+
+
+@overload
+def load_ctu_dataset(
+    name: str,
+    share_val: float = 0.3,
+    share_test: float = 0.0,
+    as_pandas: Literal[True] = True,
+) -> Tuple[pd.DataFrame, Dict[str, pd.DataFrame]]: ...
+
+
+def load_ctu_dataset(
+    name: str,
+    share_val: float = 0.3,
+    share_test: float = 0.0,
+    as_pandas: bool = False,
+) -> Union[
+    Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]],
+    Tuple[pd.DataFrame, Dict[str, pd.DataFrame]],
+]:
+    """
+    Load a CTU dataset as a getML data frame and split it into train, validation, and test sets.
+
+    The split reproduces the original split from the "Transformers meets Relational Databases" paper.
+    """
+    dataset = build_reldb_dataset(name, share_val, share_test, as_pandas)
+    return load_data_from_reldb_dataset(dataset, share_val, share_test, as_pandas)
+
+
+def infer_task_type(
+    dataset_defaults: data.dataset_defaults.CTUDatasetDefault,
+    population: pd.DataFrame,
+) -> TaskType:
+    if dataset_defaults.task is data.dataset_defaults.utils.TaskType.CLASSIFICATION:
+        if population[dataset_defaults.target_column].nunique() > 2:
+            return TaskType.MULTICLASS_CLASSIFICATION
+        return TaskType.CLASSIFICATION
+    return TaskType.REGRESSION
+
+
+def retrieve_auto_annotated_data(dataset: RelDBDataset) -> dict[str, getml.data.Roles]:
+    schema = dataset.schema
+    data_df = label_getml_roles(
+        {n: t.df for n, t in dataset.db.table_dict.items()}, schema, dataset.defaults
+    )
+    return data_df
+
+
+def retrieve_auto_datamodel(dataset_name: str, max_depth: int) -> getml.data.DataModel:
+    dataset = build_reldb_dataset(dataset_name)
+    schema = dataset.schema
+    population, peripheral = load_data_from_reldb_dataset(dataset)
+
+    data_df = {"__target_table": population, population.name: population, **peripheral}
+
+    nodes, edges = bfs(schema, dataset.defaults.target_table, max_depth)
+
+    return build_getml_datamodel(data_df, nodes, edges)
