@@ -1,6 +1,6 @@
 # %%
 import getml
-from challenge.utils.data import load_ctu_dataset
+from ctu.utils.data import load_ctu_dataset
 
 getml.set_project("{{ project_name }}")
 
@@ -38,9 +38,9 @@ getml.set_project("{{ project_name }}")
 
 # %% [markdown]
 # The population table (`{{ population_name }}`).
-{% if task_type != "multiclass" %}
+{% if task_type != "multiclass_classification" %}
 # We already set the `target` role for the target (`{{ target_column }}`).
-{% elif task_type == "multiclass" %}
+{% elif task_type == "multiclass_classification" %}
 # As {{target_column }} has more than two levels, you are dealing with a multiclass classification problem. To work on multiclass tasks in the
 # feature learning context, getML trains a separate model for each level of the target column in a one-vs-all fashion. To encode the target column
 # this way, we provide a helper function [`getml.data.make_target_columns`](https://getml.com/latest/reference/data/#getml.data.make_target_columns). For

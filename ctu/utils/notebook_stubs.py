@@ -23,13 +23,13 @@ from markdownify import markdownify as md
 from nbconvert.preprocessors import ExecutePreprocessor
 from pydantic.alias_generators import to_snake
 
-from challenge.utils.data import (
+from ctu.utils.data import (
     infer_task_type,
     load_ctu_dataset,
 )
 
 UTILS_ROOT = Path(__file__).parent
-OUTPUT_PATH = UTILS_ROOT / "../tasks"
+OUTPUT_PATH = UTILS_ROOT / "../stubs"
 
 
 """
@@ -126,7 +126,7 @@ def create_notebook_stub(dataset: str, output_path: Path = OUTPUT_PATH):
 
     population, peripheral = load_ctu_dataset(dataset, as_pandas=True)
     population_name = to_snake(dataset_defaults.target_table).replace(" ", "_")
-    peripheral_names = ([to_snake(name).lower() for name in sorted(peripheral)],)
+    peripheral_names = [to_snake(name).lower() for name in sorted(peripheral)]
 
     task_type = infer_task_type(dataset_defaults, population)
 
