@@ -37,27 +37,28 @@ getml.set_project("{{ project_name }}")
 # Now, we can inspect all tables and annotate the columns with [roles](https://getml.com/latest/user_guide/concepts/annotating_data/).
 
 # %% [markdown]
-# The population table (`{{ population_name }}`).
-{% if task_type != "multiclass_classification" %}
-# We already set the `target` role for the target (`{{ target_column }}`).
-{% elif task_type == "multiclass_classification" %}
+# # Annotating Data
+# ## Population Table: `{{ population_name }}`
+{%- if task_type != "multiclass_classification" %}
+# We already set the `target` role for the target, `{{ target_column }}`.
+{%- elif task_type == "multiclass_classification" %}
 # As {{target_column }} has more than two levels, you are dealing with a multiclass classification problem. To work on multiclass tasks in the
 # feature learning context, getML trains a separate model for each level of the target column in a one-vs-all fashion. To encode the target column
 # this way, we provide a helper function [`getml.data.make_target_columns`](https://getml.com/latest/reference/data/#getml.data.make_target_columns). For
 # a concrete example on that matter, please refere to the [CORA notebook](https://getml.com/latest/examples/enterprise-notebooks/cora/#12-prepare-data-for-getml).
-{% endif %}
-{% if task_type == "classification" %}
-# {{ target_column }} is the target column for a binary classification task.
-{% elif task_type == "regression" %}
-# {{ target_column }} is the target column for a regression task.
-{% endif %}
+{%- endif %}
+{%- if task_type == "classification" %}
+# `{{ target_column }}` is the target column for a binary classification task.
+{%- elif task_type == "regression" %}
+# `{{ target_column }}` is the target column for a regression task.
+{%- endif %}
 
 # %%
 # TODO: Annotate remaining columns with roles
 {{ population_name }}
 
 # %% [markdown]
-# Peripheral tables,
+# ## Peripheral Tables
 
 {% for table in peripheral_names %}
 # %%
