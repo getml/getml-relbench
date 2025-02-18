@@ -23,10 +23,6 @@ from pydantic.alias_generators import to_snake
 
 RANDOM_SEED = 42
 
-np.random.seed(RANDOM_SEED)
-torch.manual_seed(RANDOM_SEED)
-random.seed(RANDOM_SEED)
-
 
 RELDB_IP = "35.195.45.191"
 
@@ -56,6 +52,10 @@ def load_data_from_reldb_dataset(
     Tuple[getml.data.DataFrame, Dict[str, getml.data.DataFrame]],
     Tuple[pd.DataFrame, Dict[str, pd.DataFrame]],
 ]:
+    np.random.seed(RANDOM_SEED)
+    torch.manual_seed(RANDOM_SEED)
+    random.seed(RANDOM_SEED)
+
     with patch(
         "db_transformer.helpers.progress.is_notebook",
         lambda: getml.utilities.progress._is_jupyter()
