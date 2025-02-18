@@ -45,7 +45,11 @@ uv run --extra ctu jupyter lab
 ```
 
 ## Pick a Challenge
-| **Dataset**                                                     | **Task**                                                                          | **PR's & Submissions**                                                                       | **Task + Measure**     | **Score getML**                  | **Score RDL** | **Score Human** |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------- | -------------------------------- | ------------- | --------------- |
-| [financial](https://relational.fel.cvut.cz/dataset/Financial) | Load default       | [PR ???]()                                    | classification  | –                                |      |            |
+
+| **Dataset**                                                      | **Task**     | **PR's & Submissions**                                                                   | **Task + Measure**        | **Score getML**              | **Score GNN** | **Score Human** |
+| ---------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------- | ------------------------- | ---------------------------- | ------------- | --------------- |
+| [Financial](https://relational.fel.cvut.cz/dataset/Financial)    | loan default | [financial.ipynb](https://github.com/getml/getml-relbench/blob/main/ctu/financial.ipynb) | classification (Accuracy) | [**0.922**](financial.ipynb) | 88.73         | -               |
+| [Prima](https://relational.fel.cvut.cz/dataset/PubMed_Diabetes)  | class_label  |                                                                                          | classification (Accuracy) |                              | 64.07         | -               |
+| [PubMed](https://relational.fel.cvut.cz/dataset/PubMed_Diabetes) | arg2         |                                                                                          | classification (Accuracy) |                              | 83.04         | -               |
+| [Stats](https://relational.fel.cvut.cz/dataset/stats)            | reputation   |                                                                                          | regression (NRMSE)        |                              | 0.141         | -               |
 
