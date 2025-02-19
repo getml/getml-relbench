@@ -182,24 +182,27 @@ We're excited to see your innovative solutions and contributions to the getML co
 
 ### How to start and setup the environment
 
+> [!NOTE]
+> As other parts of the challenge require conflicting dependencies, we had to put conflicting dependencies in a separate dependency group (extra).
+> Make sure to also install dependencies of the respective group, to do so, supply the `--extra` argument to the respective `uv` subcommand:
+> e.g. `uv sync --extra relbench`
+
 To ease participation in the challenge, we have already prepared a base environment for you. To start hacking, you just need to clone this [repository](https://github.com/getml/getml-relbench.git) or clone your forked version of the repository.
 
 #### Linux
-To get started on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml):
+To get started with working on relbench notebooks on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml) with the `relbench` extra:
 ```sh
-uv run jupyter lab
+uv run --extra relbench jupyter lab
 ```
 #### macOS and Windows
 To get started on macOS and Windows, you first need to [start the getML docker service](https://getml.com/latest/install/packages/docker/):
 ```sh
-curl https://raw.githubusercontent.com/getml/getml-community/1.5.0/runtime/docker-compose.yml | docker-compose up -f -
+curl https://raw.githubusercontent.com/getml/getml-community/1.5.0/runtime/docker-compose.yml | docker compose -f - up
 ```
 Afterwards, [install uv](https://docs.astral.sh/uv/getting-started/installation/) and use the [provided environment](pyproject.toml) as above:
 ```sh
-uv run jupyter lab
+uv run --extra relbench jupyter lab
 ```
-
-You are always free to use any other project manger of your choice but we recommend to stick to [uv](https://pypi.org/project/uv/).
 
 ### Memory and External Compute Resources
 
