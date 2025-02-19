@@ -190,7 +190,7 @@ We're excited to see your innovative solutions and contributions to the getML co
 To ease participation in the challenge, we have already prepared a base environment for you. To start hacking, you just need to clone this [repository](https://github.com/getml/getml-relbench.git) or clone your forked version of the repository.
 
 #### Linux
-To get started working on relbench notebooks on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml) with the `relbench` extra:
+To get started with working on relbench notebooks on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml) with the `relbench` extra:
 ```sh
 uv run --extra relbench jupyter lab
 ```

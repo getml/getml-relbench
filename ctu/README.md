@@ -29,7 +29,7 @@ cp stubs/financial.ipynb .
 > Make sure to also install dependencies of the respective group, to do so, supply the `--extra` argument to the respective `uv` subcommand:
 > e.g. `uv sync --extra ctu`
 
-To get started working on ctu notebooks on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](../pyproject.toml) with the `ctu` extra:
+To get started with working on ctu notebooks on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](../pyproject.toml) with the `ctu` extra:
 ```sh
 uv run --extra ctu jupyter lab
 ```
