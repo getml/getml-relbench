@@ -34,3 +34,37 @@ We've been busy putting [getML FastProp](https://github.com/getml/getml-communit
 | [rel-amazon](https://relbench.stanford.edu/datasets/rel-amazon) | [item-churn](https://relbench.stanford.edu/datasets/rel-amazon/#item-churn)       | [az-item-churn.ipynb](https://github.com/getml/getml-relbench/blob/main/az-item-churn.ipynb) | classification (AUROC) | [**0.831**](az-item-churn.ipynb) | 0.828         | 0.818           |
 | [rel-hm](https://relbench.stanford.edu/datasets/rel-hm)         | [user-churn](https://relbench.stanford.edu/datasets/rel-hm/#user-churn)           | [hm-churn.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-churn.ipynb)           | classification (AUROC) | [**0.707**](hm-churn.ipynb)      | 0.699         | 0.690           |
 |                                                                 | [item-sales](https://relbench.stanford.edu/datasets/rel-hm/#item-sales)           | [hm-item.ipynb](https://github.com/getml/getml-relbench/blob/main/hm-item.ipynb)             | regression (MAE)       | [**0.031**](hm-item.ipynb)       | 0.056         | 0.036           |
+
+
+## Let's Get Started!
+
+### How to start and setup the environment
+
+We have already prepared a base environment for you. To start hacking, you just need to clone this [repository](https://github.com/getml/getml-relbench.git).
+
+#### Linux
+To get started on linux, just [install uv](https://docs.astral.sh/uv/getting-started/installation/) and leverage our [curated environment](pyproject.toml) with:
+```sh
+uv run --extra relbench jupyter lab
+```
+
+#### macOS and Windows
+To get started on macOS and Windows, you first need to [start the getML docker service](https://getml.com/latest/install/packages/docker/):
+```sh
+curl https://raw.githubusercontent.com/getml/getml-community/1.5.0/runtime/docker-compose.yml | docker compose -f - up
+```
+Afterwards, [install uv](https://docs.astral.sh/uv/getting-started/installation/) and use the [provided environment](pyproject.toml) as above:
+```sh
+uv run --extra relbench jupyter lab
+```
+
+### Memory and External Compute Resources
+
+For larger tasks and datasets, the size of the data might exceed the memory capacity of your local machine. One solution is to use the [memory mapping feature](https://getml.com/latest/reference/engine/engine/#getml.engine.launch), but keep in mind that this might increase compute time.
+
+We recommend leveraging virtual machines from major cloud providers to handle such workloads. Many providers offer free trials or starter budgets that should cover your needs:  
+
+- [Google Cloud Free Trial](https://cloud.google.com/free/docs/free-cloud-features#free-trial)  
+- [Azure Free Trial](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0044p)
+
+For most datasets, we highly recommend developing on a machine with **64 to 128GB of memory** and **more than 16 CPU cores** to keep getML pipeline runtimes around 30 to 60 minutes. While smaller setups are possible, they will likely require getML's memory mapping to be turned on, resulting in increased runtimes overall.
