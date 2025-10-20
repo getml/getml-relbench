@@ -51,7 +51,7 @@ uv run --extra relbench jupyter lab
 #### macOS and Windows
 To get started on macOS and Windows, you first need to [start the getML docker service](https://getml.com/latest/install/packages/docker/):
 ```sh
-curl https://raw.githubusercontent.com/getml/getml-community/1.5.0/runtime/docker-compose.yml | docker compose -f - up
+curl https://raw.githubusercontent.com/getml/getml-community/refs/heads/main/runtime/docker-compose.yml | docker compose -f - up
 ```
 Afterwards, [install uv](https://docs.astral.sh/uv/getting-started/installation/) and use the [provided environment](pyproject.toml) as above:
 ```sh
